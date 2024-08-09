@@ -445,13 +445,13 @@
                 </defs>
               </svg>
             </h2>
-            <h2 class="typing-block-2">вы хотите купить|</h2>
+            <h2 class="typing-block-2"><span id="typing-text"></span><span id="cursor">|</span></h2>
           </div>
           <div class="price-slider-block">
             <div class="price-top">
-              <p class="price-counter-active">3.5 ₽</p>
+              <p class="price-counter">5₽</p>
+              <p class="price-counter">4₽</p>
               <p class="price-counter">3₽</p>
-              <p class="price-counter">2,5₽</p>
               <p class="price-counter">2₽</p>
             </div>
             <div class="price-middle">
@@ -461,13 +461,17 @@
                 draggable="false"
                 class="slider"
               />
+            <div class="microphone">
+              <p class="price-counter-active">5₽</p>
+              <img
+                src="./img/микрофон.png"
+                alt="microphone"
+                draggable="false"
+                class="microphone"
+              />
+            </div>
               <div class="price-slider">
-                <img
-                  src="./img/микрофон.png"
-                  alt="microphone"
-                  draggable="false"
-                  class="microphone"
-                />
+                <div class="microphone-glow"></div>
                 <p>0</p>
                 <p>1000</p>
                 <p>10000</p>
@@ -476,9 +480,9 @@
               </div>
             </div>
             <div class="price-bottom">
-              <p class="price-counter">-15%</p>
-              <p class="price-counter">-28%</p>
-              <p class="price-counter">-43%</p>
+              <p class="price-counter-percent">-20%</p>
+              <p class="price-counter-percent">-40%</p>
+              <p class="price-counter-percent">-60%</p>
             </div>
           </div>
           <div class="calculator-box">
@@ -546,24 +550,65 @@
                   />
                 </button>
                 <div class="full-arrows-left hide">
+                  <img class="arrows-bg"
+                  src="./img/arrows/background.png"
+                  draggable="false"
+                  alt="arrow right"
+                />
+                  <div class="arrows-container">
 
+<button>
+  <img class="full-arrows-left-triple"
+  src="./img/arrows/triple-left.png"
+  draggable="false"
+  alt="arrow right"
+/>
+</button>
+<button>
+  <img class="full-arrows-left-double"
+  src="./img/arrows/double-left.png"
+  draggable="false"
+  alt="arrow right"
+/>
+</button>
+                  </div>
                 </div>
                 <div class="calculator-value">
-                  <div class="calculator-value-numb">900 минут</div>
+                  <div class="calculator-value-numb">1 минут</div>
                 </div>
                 <button class="change-price-right">
-                  <img
+                  <img 
                     src="./img/arrows/arrow-right.png"
                     draggable="false"
                     alt="arrow right"
                   />
                 </button>
                 <div class="full-arrows-right hide">
-
+                  <img class="arrows-bg"
+                  src="./img/arrows/background.png"
+                  draggable="false"
+                  alt="arrow right"
+                />
+                  <div class="arrows-container">
+<button>
+  <img class="full-arrows-right-double"
+  src="./img/arrows/double-right.png"
+  draggable="false"
+  alt="arrow right"
+/>
+</button>
+<button>
+  <img class="full-arrows-right-triple"
+  src="./img/arrows/triple-right.png"
+  draggable="false"
+  alt="arrow right"
+/>
+</button>
+                  </div>
                 </div>
               </div>
               <h3>Итого</h3>
-              <h1>3 150.00 ₽</h1>
+              <h1>3.50 ₽</h1>
               <div class="currency-display">
                 <img
                 width="64px"
@@ -793,5 +838,6 @@
         </div>
       </div>
     </div>
+    <script src="index.js"></script>
   </body>
 </html>
