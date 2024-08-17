@@ -149,9 +149,9 @@ const activePriceCounter = document.querySelector('.price-counter-active');
 
 const SLIDER_WIDTH = 1160; // Total width of the slider in pixels
 const PRICE_RANGES = [
-    { max: 1000, price: 5, width: 300 },
-    { max: 10000, price: 4, width: 280 },
-    { max: 50000, price: 3, width: 300 },
+    { max: 1000, price: 5, width: 250 },
+    { max: 10000, price: 4, width: 290 },
+    { max: 50000, price: 3, width: 280 },
     { max: 100000, price: 2, width: SLIDER_WIDTH - 880 }
 ];
 

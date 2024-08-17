@@ -101,8 +101,6 @@ body, html {
 }
 
 .layout-container {
-    position: relative;
-    width: 1250px;
     height: 100%;
     padding-top: 40px;
 }
@@ -222,7 +220,7 @@ border-radius: 8px 8px 0px 0px;
 }
 
 .main-block {
-    width: 1250px;
+
     height: 1076px;
     background: linear-gradient(270deg, rgba(123, 123, 123, 0.2) 0%, rgba(174, 174, 174, 0.2) 50%, rgba(123, 123, 123, 0.2) 100%);
     box-shadow: -11px 0px 40px #000000, 11px 0px 40px #000000;
@@ -313,6 +311,7 @@ position: relative;
     justify-content: space-between;
     font-family: 'Gilroy';
     font-size: 20px;
+    padding-left: 10px;
 }
 
 .price-bottom {
@@ -339,7 +338,9 @@ text-shadow: -2px 4px 8.2px #000000, -11px 10px 15px rgba(0, 0, 0, 0.9);
 
 }
 
-
+body > div > div.main-block > div > div.price-slider-block > div.price-top > p:nth-child(2) {
+    margin-left: -20px;
+}
 
 .price-counter-active {
     font-family: 'Gilroy';
@@ -385,7 +386,11 @@ background-clip: text;
 text-fill-color: transparent;
 font-size: 20px;
 line-height: 24px;
+padding-right: 10px;
+}
 
+body > div > div.main-block > div > div.price-slider-block > div.price-middle > div.price-slider > p:nth-child(2) {
+    padding-left: 10px;
 }
 
 body > div > div.main-block > div > div.price-slider-block > div.price-middle > div.microphone > p {
