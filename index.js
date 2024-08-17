@@ -139,7 +139,6 @@ fullArrowsRight.addEventListener('mouseleave', () => hideFullArrows(fullArrowsRi
 
 
 // ----------------------------------------------------------MICROPHONE--------------------------------------------------------//
-// Constants and element selections
 const slider = document.querySelector('.price-slider');
 const microphone = document.querySelector('.microphone');
 const totalPrice = document.querySelector('.price-display-box h1');
@@ -264,6 +263,13 @@ if (microphone) {
     });
 }
 
+// New event listener for clicking on the slider
+if (slider) {
+    slider.addEventListener('click', (e) => {
+        moveMicrophone(e);
+    });
+}
+
 // Initialize display
 updateDisplay(1200); // Initial value
 
@@ -341,3 +347,42 @@ const phrases = [
   
   // Start the animation
   typePhrase();
+
+
+  //------------------------------------------------------POP-UP----------------------------------------------//
+  let loggedIn = false;
+
+  // Wait for the DOM to be fully loaded before attaching event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+      const buyButton = document.querySelector('.buy-button');
+      const modal = document.getElementById('loginModal');
+      const closeBtn = document.querySelector('.close');
+      const body = document.body;
+  
+      function openModal() {
+          modal.style.display = 'block';
+          body.classList.add('modal-open');
+      }
+  
+      function closeModal() {
+          modal.style.display = 'none';
+          body.classList.remove('modal-open');
+      }
+  
+      buyButton.addEventListener('click', () => {
+          if (!loggedIn) {
+              openModal();
+          } else {
+              // Proceed with the purchase logic
+              console.log('User is logged in. Proceeding with purchase...');
+          }
+      });
+  
+      closeBtn.addEventListener('click', closeModal);
+  
+      window.addEventListener('click', (event) => {
+          if (event.target === modal) {
+              closeModal();
+          }
+      });
+  });
