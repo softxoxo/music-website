@@ -1,0 +1,256 @@
+@media (max-width: 1000px) {
+  .header,
+  .footer,
+  .logo-container,
+  .balance {
+    display: none;
+  }
+
+  .layout-container {
+    padding-top: 0px;
+	width: 100%;
+  }
+  .main-block {
+    margin-top: -130px;
+    width: 1000px;
+    background: rgba(25, 25, 25, 1);
+    box-shadow: -11px 0px 40px #000000, 11px 0px 40px #000000;
+    border-radius: 10px;
+    position: relative;
+  }
+  .middle {
+    width: 100%;
+    padding: 0px;
+  }
+  .price-slider-block,
+  .price-slider {
+    width: 100%;
+  }
+  .responsive-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 940px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 10px 7px 30px #000000;
+    border-radius: 5px;
+  }
+  body
+    > div.layout-container
+    > div.main-block
+    > div.responsive-header
+    > img:nth-child(2) {
+    padding-top: 16px;
+  }
+
+  .payment-navigation {
+    font-family: "Mulish";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    width: 440px;
+    gap: 10px;
+  }
+  .typing-block {
+	margin-top: 20px
+  }
+  .price-top {
+	width: 640px;
+  }
+  .price-slider-block, .price-middle, .price-slider {
+	max-width: 850px;
+  } 
+  .slider {
+	display: none
+  }
+  .slider850 {
+	position: absolute;
+	display: block;
+	margin-left: -10px;
+  }
+  .calculator-box {
+	margin-top: 60px;
+  }
+  .level-animation {
+	display: none
+  }
+  .level-animation-600 {
+	display: block;
+  }
+  .typing-block-1 {
+	width: 200px;
+  }
+  .typing-block  {
+font-weight: 400;
+font-size: 13px;
+  }
+}
+
+@media (max-width: 700px) {
+	.main-block {
+		width: 700px;
+	}
+	.responsive-header {
+		width: 620px;
+	  }
+	  .slider850 {
+		display: none
+	  }
+	  .slider612 {
+		position: absolute;
+		display: block;
+		margin-left: -10px;
+	  }
+	  .price-top {
+		width: 460px;
+	  }
+	  .change-price-box {
+		width: 300px;
+		height: 44px;
+	  }
+	  .change-price-box img {
+		width: 44px;
+	  }
+	  .full-arrows-right {
+		margin-left: 306px;
+	  }
+	  .buy-button {
+		width: 250px;
+	  }
+	  .currency-display {
+		width: 42px;
+		right: -24px;
+	  }
+	  .price-display-box {
+		backdrop-filter: blur(0px);
+	  }
+
+	  .price-display-box h3 {
+		padding-top: 20px;
+
+	font-size: 16px;
+
+	}
+	
+	.price-display-box h1 {
+	font-size: 26px;
+	line-height: 30px;
+	}
+	.price-slider {
+		font-size: 13px;
+	}
+	.price-counter-active {
+		font-size: 16px;
+	}
+	.microphone img {
+		width: 50px;
+		height: 70px;
+	}
+	  .calculator-box, .calculator-bg {
+		width: 300px;
+		height: 160px;
+	  }
+	  .price-slider-block, .price-middle, .price-slider {
+		max-width: 620px;
+	  } 
+	  .level-animation-600 {
+		display: none
+	  }
+	  .level-animation-460 {
+		display: block;
+		
+	  }
+}
+
+@media (max-width: 480px) {
+	.main-block {
+		width: 480px;
+		margin-top: 10px;
+		height: 600px;
+	}
+	.typing-block {
+		display: none;
+	}
+	.responsive-header {
+		width: 460px;
+		height: 35px;
+
+background: rgba(255, 255, 255, 0.2);
+opacity: 0.9;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 10px 7px 30px #000000;
+
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 5px;
+
+	  }
+	  .responsive-header svg {
+		width: 28px;
+	  }
+	  .responsive-header img:nth-child(2) {
+		margin-top: -4px;
+		width: 180px;
+	  }
+	  .responsive-header img:nth-child(3) {
+		width: 24px;
+	  }
+	  .slider612 {
+		display: none
+	  }
+	  .slider460 {
+		position: absolute;
+		display: block;
+		margin-left: -10px;
+	  }
+	  .price-top {
+		font-size: 13px;
+		width: 340px;
+		margin-bottom: -10px;
+	  }
+	  
+	  .price-bottom {
+		font-size: 13px;
+		margin-top: -10px;
+	  }
+	  .price-display-box h3 {
+		padding-top: 20px;
+	font-size: 16px;
+	}
+	.price-display-box h1 {
+	font-size: 26px;
+	line-height: 30px;
+	}
+	.price-slider {
+		font-size: 13px;
+	}
+	.price-counter-active {
+		font-size: 16px;
+	}
+	.microphone img {
+		width: 50px;
+		height: 70px;
+	}
+	  .calculator-box, .calculator-bg {
+		width: 300px;
+		height: 160px;
+	  }
+	  .price-slider-block, .price-middle, .price-slider {
+		max-width: 460px;
+	  } 
+	  .price-middle {
+		padding: 0px;
+		height: 40px;
+	  }
+	  .price-slider {
+		height: 28px;
+	  }
+	  .level-animation-600 {
+		display: none
+	  }
+	  .level-animation-460 {
+		display: block;
+		
+	  }
+ }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Centered Block Layout with Header and Footer</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.media.css" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
     </style>
@@ -178,6 +179,55 @@
             </button>
           </div>
         </header>
+        <div class="responsive-header">
+          <svg width="45" height="58" viewBox="0 0 45 58" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_dii_243_182)">
+            <path d="M12.4129 8.1035C11.7583 8.25743 11.2615 8.5345 10.7489 9.02708C9.97609 9.78133 9.69219 10.551 9.69219 11.8825V12.6136H12.7677C15.7013 12.6136 15.867 12.6213 16.1587 12.7676C16.5136 12.9446 16.7896 13.3833 16.7896 13.7681C16.7896 14.1529 16.5136 14.5916 16.1587 14.7686C15.867 14.9149 15.7013 14.9226 12.7677 14.9226H9.69219V17.2315H12.7677C15.7013 17.2315 15.867 17.2392 16.1587 17.3854C16.5136 17.5625 16.7896 18.0012 16.7896 18.386C16.7896 18.7708 16.5136 19.2095 16.1587 19.3865C15.867 19.5328 15.7013 19.5405 12.7677 19.5405H9.69219V21.8494H12.7677C15.7013 21.8494 15.867 21.8571 16.1587 22.0033C16.5136 22.1803 16.7896 22.619 16.7896 23.0039C16.7896 23.3887 16.5136 23.8274 16.1587 24.0044C15.867 24.1506 15.7013 24.1583 12.7677 24.1583H9.69219V26.4673H12.7677C15.7013 26.4673 15.867 26.475 16.1587 26.6212C16.5136 26.7982 16.7896 27.2369 16.7896 27.6218C16.7896 28.0066 16.5136 28.4453 16.1587 28.6223C15.867 28.7685 15.7013 28.7762 12.7677 28.7762H9.69219V29.5074C9.69219 30.8389 9.97609 31.6008 10.7489 32.3628C11.2694 32.8631 11.8372 33.1709 12.5154 33.3094C13.099 33.4249 22.8461 33.4249 23.4297 33.3094C24.1079 33.1709 24.6757 32.8631 25.1961 32.3628C25.969 31.6008 26.2529 30.8389 26.2529 29.5074V28.7762H23.1694C20.1175 28.7762 20.0781 28.7762 19.7705 28.6069C19.4157 28.4145 19.1554 27.9912 19.1554 27.6218C19.1554 27.2523 19.4157 26.829 19.7705 26.6366C20.0781 26.4673 20.1175 26.4673 23.1694 26.4673H26.2529V24.1583H23.1694C20.1175 24.1583 20.0781 24.1583 19.7705 23.989C18.9741 23.5503 18.9741 22.4574 19.7705 22.0187C20.0781 21.8494 20.1175 21.8494 23.1694 21.8494H26.2529V19.5405H23.1694C20.1175 19.5405 20.0781 19.5405 19.7705 19.3711C18.9741 18.9324 18.9741 17.8395 19.7705 17.4008C20.0781 17.2315 20.1175 17.2315 23.1694 17.2315H26.2529V14.9226H23.1694C20.1175 14.9226 20.0781 14.9226 19.7705 14.7533C18.9741 14.3146 18.9741 13.2217 19.7705 12.783C20.0781 12.6136 20.1175 12.6136 23.1694 12.6136H26.2529V11.8825C26.2529 10.551 25.969 9.78903 25.1961 9.02708C24.6757 8.51911 24.0605 8.19586 23.406 8.07271C22.783 7.95727 12.9097 7.98805 12.4129 8.1035Z" fill="url(#paint0_linear_243_182)"/>
+            <path d="M5.60722 12.4873C5.46528 12.5565 5.26812 12.7182 5.17349 12.849L5 13.0876L5.00002 27.4504C5.00002 31.568 5.0079 31.7451 5.16563 32.3377C5.75708 34.5004 6.97153 36.1782 8.76166 37.3019C10.1259 38.1639 11.364 38.5256 13.1857 38.5872L14.4238 38.6334V45.6911H12.5312C10.7805 45.6911 10.607 45.7065 10.3231 45.845C9.96822 46.022 9.69221 46.4607 9.69221 46.8455C9.69221 47.2304 9.96822 47.6691 10.3231 47.8461C10.6228 48 10.7726 48 17.9725 48C25.1725 48 25.3223 48 25.622 47.8461C25.9769 47.6691 26.2529 47.2304 26.2529 46.8455C26.2529 46.4607 25.9769 46.022 25.622 45.845C25.3381 45.7065 25.1646 45.6911 23.4139 45.6911H21.5213V38.6334L22.7673 38.5872C24.6205 38.5256 25.8192 38.1716 27.2465 37.2634C28.9578 36.1782 30.1565 34.5158 30.7716 32.3762C30.9293 31.8297 30.9372 31.5834 30.9687 27.589C31.0003 22.9172 31.0974 12.901 30.6536 12.5545C30.4 12.3564 30.1091 12.3718 29.431 12.3564L28.6266 12.3256L28.595 27.004C28.5714 31.0062 28.5556 31.6219 28.4373 31.999C27.767 34.1771 26.0636 35.7395 23.8713 36.1782C22.9644 36.3629 12.9807 36.3629 12.0738 36.1782C10.1733 35.7934 8.46987 34.4234 7.76802 32.7148C7.35006 31.6912 7.3264 31.4218 7.3264 26.7577L7.32638 12.3564H6.60087C6.08827 12.3564 5.7886 12.3949 5.60722 12.4873Z" fill="url(#paint1_linear_243_182)"/>
+            </g>
+            <defs>
+            <filter id="filter0_dii_243_182" x="0.450073" y="0.338804" width="43.6" height="57.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dx="4.25007" dy="1.1388"/>
+            <feGaussianBlur stdDeviation="4.4"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.56 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_243_182"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_243_182" result="shape"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dx="1.76614" dy="0.473236"/>
+            <feGaussianBlur stdDeviation="0.914222"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.708141 0 0 0 0 0.0737647 0 0 0 0 0.270471 0 0 0 1 0"/>
+            <feBlend mode="normal" in2="shape" result="effect2_innerShadow_243_182"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dx="-1.76614" dy="-0.473236"/>
+            <feGaussianBlur stdDeviation="0.914222"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.385412 0 0 0 0 0.0401471 0 0 0 0 0.147206 0 0 0 1 0"/>
+            <feBlend mode="normal" in2="effect2_innerShadow_243_182" result="effect3_innerShadow_243_182"/>
+            </filter>
+            <linearGradient id="paint0_linear_243_182" x1="3.37702" y1="17.3185" x2="29.5017" y2="21.8686" gradientUnits="userSpaceOnUse">
+            <stop offset="1" stop-color="#AB1241"/>
+            <stop stop-color="#6B0B29"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_243_182" x1="3.37702" y1="17.3185" x2="29.5017" y2="21.8686" gradientUnits="userSpaceOnUse">
+            <stop offset="1" stop-color="#AB1241"/>
+            <stop stop-color="#6B0B29"/>
+            </linearGradient>
+            </defs>
+            </svg>
+            <img
+            src="./img/стоимость-телефон.png"
+            alt="Другой аккаунт"
+            draggable="false"
+          />
+          <img
+          src="./img/бургер.png"
+          alt="Другой аккаунт"
+          draggable="false"
+        />
+        </div>
         <div class="middle">
           <div class="balance">
             <svg
@@ -461,6 +511,30 @@
                 draggable="false"
                 class="slider"
               />
+              <img
+                src="./img/slider-850.png"
+                alt="slider"
+                draggable="false"
+                class="slider850"
+              />
+              <img
+                src="./img/slider-612.png"
+                alt="slider"
+                draggable="false"
+                class="slider612"
+              />
+              <img
+                src="./img/slider-460.png"
+                alt="slider"
+                draggable="false"
+                class="slider460"
+              />
+              <img
+                src="./img/slider-460-rotate.png"
+                alt="slider"
+                draggable="false"
+                class="slider460r"
+              />
             <div class="microphone">
               <p class="price-counter-active">5₽</p>
               <img
@@ -643,7 +717,32 @@
           </div>
           <div class="user-level">
             <img
+            class="level-animation"
                   src="./img/Анимация уровня.png"
+                  draggable="false"
+                  alt="Анимация уровня"
+                />
+                <img
+                class="level-animation-850"
+                      src="./img/Анимация уровня-850.png"
+                      draggable="false"
+                      alt="Анимация уровня"
+                    />
+            <img
+            class="level-animation-600"
+                  src="./img/Анимация уровня-600.png"
+                  draggable="false"
+                  alt="Анимация уровня"
+                />
+            <img
+            class="level-animation-460"
+                  src="./img/Анимация уровня-460.png"
+                  draggable="false"
+                  alt="Анимация уровня"
+                />
+            <img
+            class="level-animation-340"
+                  src="./img/Анимация уровня-340.png"
                   draggable="false"
                   alt="Анимация уровня"
                 />
