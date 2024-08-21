@@ -284,10 +284,10 @@ function updateCalculatorValue(changeAmount) {
 // Add event listeners for arrow buttons
 const leftArrow = document.querySelector('.change-price-left');
 const rightArrow = document.querySelector('.change-price-right');
-const doubleLeftArrow = document.querySelector('.full-arrows-left .full-arrows-left-double');
-const tripleLeftArrow = document.querySelector('.full-arrows-left .full-arrows-left-triple');
-const doubleRightArrow = document.querySelector('.full-arrows-right .full-arrows-right-double');
-const tripleRightArrow = document.querySelector('.full-arrows-right .full-arrows-right-triple');
+const doubleLeftArrow = document.querySelector('.full-arrows-left-double');
+const tripleLeftArrow = document.querySelector('.full-arrows-left-triple');
+const doubleRightArrow = document.querySelector('.full-arrows-right-double');
+const tripleRightArrow = document.querySelector('.full-arrows-right-triple');
 
 if (leftArrow) leftArrow.addEventListener('click', () => updateCalculatorValue(-1));
 if (rightArrow) rightArrow.addEventListener('click', () => updateCalculatorValue(1));
@@ -386,3 +386,7 @@ const phrases = [
           }
       });
   });
+
+
+  // --------------------------------------------SMTH--------------------------------------------------//
+  

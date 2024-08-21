@@ -453,6 +453,10 @@ height: 90px;
     position: absolute;
 }
 
+.calculator-bg-mobile {
+    display: none;
+}
+
 .change-price-box {
     display: flex;
     width: 360px;
@@ -463,23 +467,30 @@ height: 90px;
 }
 
 .change-price-left, .change-price-right {
-    min-width: 70px;
-    min-height: 70px;
+    width: 70px;
+    height: 70px;
     display: grid;
 }
 
 .change-price-left {
-    margin-left: -10px;
+    margin-left: -4px;
 }
+.calculator-mobile-bg {
+    display: none
+  }
 
 .change-price-right {
-    margin-right: -10px;
+    margin-right: -4px;
 }
 
-
+.mobile-arrows-left, .mobile-arrows-right {
+    display: none;
+}
 
 .full-arrows-right, .full-arrows-left{
     position: absolute;
+    width: 130px;
+    height: 60px;
 }
 
 .full-arrows-right > img, .full-arrows-left > img, .arrows-container {
@@ -488,6 +499,7 @@ height: 90px;
 
 .arrows-container {
     display: flex;
+    padding-top: 2px;
 }
 
 .arrows-bg {
@@ -496,22 +508,22 @@ height: 90px;
 }
 
 .full-arrows-right-double{
-    min-width: 70px;
+    width: 80px;
     margin-left: -14px;
 }
 
 .full-arrows-left-double {
-    min-width: 70px;
+    width: 80px;
     margin-left: -20px;
 }
 
 .full-arrows-right-triple {
-    min-width: 80px;
+    width: 84px;
     margin-left: -20px;
 }
 
 .full-arrows-left-triple {
-    min-width: 80px;
+    width: 84px;
     margin-left: -14px;
 }
 
