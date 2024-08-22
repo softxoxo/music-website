@@ -457,6 +457,10 @@ height: 90px;
     display: none;
 }
 
+.arrows-bg-mobile {
+    display: none;
+}
+
 .change-price-box {
     display: flex;
     width: 360px;
@@ -508,23 +512,23 @@ height: 90px;
 }
 
 .full-arrows-right-double{
-    width: 80px;
+     width: 84px;
     margin-left: -14px;
 }
 
 .full-arrows-left-double {
-    width: 80px;
-    margin-left: -20px;
+    width: 106px;
+    margin-left: -30px;
 }
 
 .full-arrows-right-triple {
-    width: 84px;
-    margin-left: -20px;
+    width: 106px;
+    margin-left: -30px;
 }
 
 .full-arrows-left-triple {
-    width: 84px;
-    margin-left: -14px;
+    width: 106px;
+    margin-left: -20px;
 }
 
 .full-arrows-right {
@@ -714,6 +718,10 @@ font-size: 26px;
 line-height: 120%;
 text-decoration-line: underline;
 color: #900F37;
+}
+
+.modal-lines {
+    display: none;
 }
 
 .modal-line {

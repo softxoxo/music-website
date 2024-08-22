@@ -1,4 +1,5 @@
 @media (max-width: 1000px) {
+	
   .header,
   .footer,
   .logo-container,
@@ -15,7 +16,7 @@
     width: 1000px;
     background: rgba(25, 25, 25, 1);
     box-shadow: -11px 0px 40px #000000, 11px 0px 40px #000000;
-    border-radius: 10px;
+    border-radius: 0px;
     position: relative;
   }
   .middle {
@@ -170,9 +171,10 @@ font-size: 13px;
 }
 
 @media (max-width: 480px) {
+	
 	.main-block {
 		width: 480px;
-		margin-top: -10px;
+		margin-top: -20px;
 		height: 600px;
 	}
 	.typing-block {
@@ -246,6 +248,9 @@ border-radius: 5px;
 	.price-counter-active {
 		font-size: 16px;
 	}
+	.microphone {
+		left: 0;
+	}
 	.microphone img {
 		width: 40px;
 		height: 62px;
@@ -276,7 +281,7 @@ border-radius: 5px;
 	  .calculator-value-numb {
 		padding-left: 4px;
 		font-size: 14px;
-		width: 84px;
+		width: 90px;
 	  }
 	  .change-price-left {
 		height: 21px;
@@ -335,5 +340,206 @@ border-radius: 5px;
 	  }
 	  .user-level {
 		padding-top: 100px;
+	  }
+ }
+
+
+ @media (max-width: 360px) {
+	.main-block {
+		width: 360px;
+		height: 820px;
+		background: rgba(32, 32, 32, 1);
+	}
+	.payment-navigation {
+		font-size: 14px;
+		max-width: 282px;
+		gap: 2px;
+		line-height: 10px;
+	}
+
+	.responsive-header {
+		max-width: 340px;
+		height: 35px;
+	  }
+	  .responsive-header svg {
+		width: 24px;
+	  }
+	  .responsive-header img:nth-child(2) {
+		margin-top: -10px;
+		width: 152px;
+	  }
+	  .responsive-header img:nth-child(3) {
+		width: 20px;
+	  }
+
+	  .payment-navigation {
+		margin-top: 30px;
+		font-size: 14px;
+	  }
+	  
+	  .payment-navigation-btn-active {
+		width: 220px;
+		position: absolute;
+		padding-left: 70px;
+		margin-top: -20px;
+	  }
+
+	  .slider460 {
+		display: none
+	  }
+
+	  .slider460r {
+		left: 0px;
+		top: 0px;
+		margin-right: -10px;
+		padding-top: 20px;
+		position: absolute;
+		display: block;
+	  }
+
+	  .price-top {
+		font-size: 13px;
+		width: 280px;
+		margin-bottom: -10px;
+	  }
+	  
+	  .price-bottom {
+		font-size: 13px;
+		margin-top: 10px;
+	  }
+
+	  .price-display-box, .calculator-box {
+		width: 242px;
+		height: 102px;
+	  }
+	  .calculator-box {
+		margin-top: 160px;
+	  }
+	  .price-display-box h3 {
+	font-size: 13px;
+	line-height: 8px;
+		padding-top: 40px;
+	}
+
+	.price-display-box h1 {
+	font-size: 19px;
+	line-height: 14px;
+
+	}
+
+	.price-slider {
+		font-size: 11px;
+	}
+	.price-counter-active {
+		font-size: 16px;
+	}
+	.microphone img {
+		width: 40px;
+		height: 62px;
+		margin-top: 6px;
+		transform: rotate(270deg);
+	}
+	  .calculator-bg img {
+		width: 242px;
+	  }
+	  .arrows-bg-mobile {
+		display: block;
+		position: absolute;
+		top: -414px;
+		z-index: 1;
+	}
+	  .calculator-mobile-bg  {
+		display: flex;
+	  }
+	  .calculator-box svg {
+		display: none
+	  }
+	  
+
+	  .change-price-box {
+		position: absolute;
+		top: -416px;
+		z-index: 2;
+	  }
+	  .calculator-value-numb {
+		padding-left: 4px;
+		font-size: 14px;
+
+	  }
+
+	  .price-slider-block, .price-middle, .price-slider {
+		max-width: 360px;
+		height: 30px;
+	  } 
+	  .price-slider-block {
+		transform: rotate(90deg);
+		margin-top: 240px;
+		margin-left: 70px;
+		z-index: 2;
+	  }
+
+	  .hidden-text {
+		opacity: 1;
+	  }
+
+	  .price-counter {
+		padding-bottom: 10px;
+	  }
+
+	  .price-counter-percent, .price-counter {
+		transform: rotate(270deg);
+	  }
+	  .price-counter-active {
+		display: none;
+	  }
+
+	  
+	  .price-middle {
+		padding: 0px;
+		height: 40px;
+	  }
+
+	  .user-level {
+		margin-top: -60px;
+	  }
+	  .modal-content {
+		margin: 30% auto;
+		font-size: 14px;
+		width: 300px;
+		height: 290px;
+opacity: 0.9;
+filter: drop-shadow(0px 0px 20px #000000);
+border-radius: 5px;
+	  }
+	  .modal-lines {
+		display: block;
+		position: absolute;
+		margin-bottom: -90px;
+	  }
+	  .modal-bg {
+		display: none;
+	  }
+	  .modal-top {
+		height: 110px;
+		margin-top: -10px;
+	  }
+	  .modal-top p {
+		padding-bottom: 0px;
+		padding-top: 0px;
+	  }
+	  .modal-buttons, .modal-present {
+		font-size: 18px;
+	  }
+	  .modal-present {
+		padding-bottom: 8px;
+	  }
+	  .close {
+		position: absolute;
+		right: 10px;
+		width: 16px;
+		height: 16px;
+	  }
+	  .modal-center {
+		padding-top: 0px;
 	  }
  }
