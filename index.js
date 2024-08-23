@@ -162,13 +162,13 @@ function updateSliderDimensions() {
     if (windowWidth >= 1160) {
         SLIDER_WIDTH = 1120;
         isRotated = false;
-    } else if (windowWidth >= 1000) {
+    } else if (windowWidth >= 860) {
         SLIDER_WIDTH = 850;
         isRotated = false;
-    } else if (windowWidth >= 700) {
+    } else if (windowWidth >= 630) {
         SLIDER_WIDTH = 620;
         isRotated = false;
-    } else if (windowWidth >= 480) {
+    } else if (windowWidth >= 434) {
         SLIDER_WIDTH = 430;
         isRotated = false;
     } else {
@@ -430,5 +430,104 @@ const phrases = [
   });
 
 
-  // --------------------------------------------SMTH--------------------------------------------------//
+  // --------------------------------------------LEVEL--------------------------------------------------//
+  const progressFill = document.getElementById('progressFill');
+  const progressPath = progressFill.querySelector('path');
+  const valueInput = Math.floor(Math.random() * 101);
+  const progressValueElement = document.getElementById("progressValue");
   
+  let containerWidth, containerHeight;
+  
+  function updateContainerDimensions() {
+      const windowWidth = window.innerWidth;
+      
+      if (windowWidth >= 1160) {
+          containerWidth = 1154;
+          containerHeight = 100;
+      } else if (windowWidth >= 860) {
+          containerWidth = 850;
+          containerHeight = 73;
+      } else if (windowWidth >= 620) {
+          containerWidth = 600;
+          containerHeight = 73;
+      } else if (windowWidth >= 460) {
+          containerWidth = 460;
+          containerHeight = 58;
+      } else {
+          containerWidth = 340;
+          containerHeight = 48;
+      }
+  }
+  
+  function generateVariedPath(width, height) {
+      let path = `M0 ${height} `;
+      const segments = 10;
+      const segmentWidth = width / segments;
+      
+      for (let i = 1; i <= segments; i++) {
+          const x = i * segmentWidth;
+          let y;
+          if (i === segments) {
+              y = 0; // Ensure the last point reaches the top
+          } else {
+              const progress = i / segments;
+              const randomFactor = Math.random() * 0.4 - 0.2; // Random value between -0.2 and 0.2
+              y = height - (progress + randomFactor) * height;
+              y = Math.max(0, Math.min(height, y)); // Clamp y between 0 and height
+          }
+          path += `L${x} ${y} `;
+      }
+      
+      path += `L${width} 0 L${width} ${height} Z`;
+      return path;
+  }
+  
+  function animateProgress(targetValue) {
+      const duration = 1000; // 1 second
+      const startTime = performance.now();
+      const startWidth = parseFloat(progressFill.style.width) || 0;
+      const startValue = 0;
+      
+      const targetWidth = (targetValue / 100) * containerWidth;
+      const targetHeight = (targetValue / 100) * containerHeight;
+      
+      const variedPath = generateVariedPath(targetWidth, targetHeight);
+      
+      function step(currentTime) {
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / duration, 1);
+          
+          const currentWidth = startWidth + (targetWidth - startWidth) * progress;
+          const currentValue = Math.round(startValue + (targetValue - startValue) * progress);
+  
+          progressPath.setAttribute('d', variedPath);
+          progressFill.setAttribute('viewBox', `0 0 ${currentWidth} ${targetHeight}`);
+          progressFill.style.width = `${currentWidth}px`;
+          progressFill.style.height = `${targetHeight}px`;
+          
+          progressValueElement.innerHTML = `${currentValue}%`;
+          
+          if (progress < 1) {
+              requestAnimationFrame(step);
+          }
+      }
+      
+      requestAnimationFrame(step);
+  }
+  
+  function updateProgress() {
+      updateContainerDimensions(); // Update dimensions before animating
+      const targetValue = Math.min(Math.max(parseInt(valueInput) || 0, 0), 100);
+      progressFill.style.width = '0';
+      // Set initial height based on the target value
+      const initialHeight = (targetValue / 100) * containerHeight;
+      progressFill.style.height = `${initialHeight}px`;
+      progressValueElement.innerHTML = "0%"; // Reset the progress value to 0%
+      setTimeout(() => animateProgress(targetValue), 50); // Small delay to ensure reset is visible
+  }
+  
+  // Initial update
+  updateProgress();
+  
+  // Update on window resize
+  window.addEventListener('resize', updateProgress);

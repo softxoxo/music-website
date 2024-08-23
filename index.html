@@ -338,34 +338,10 @@
             </svg>
           </div>
           <div class="payment-navigation">
-            <button class="payment-navigation-btn hide">Мой аккаунт</button>
-            <button class="payment-navigation-btn-active">
-              <img
-                src="./img/Мой аккаунт.png"
-                alt="Мой аккаунт"
-                draggable="false"
-              />
-            </button>
+            <button class="payment-navigation-btn-active">Мой аккаунт</button>
             <button class="payment-navigation-btn">В подарок</button>
-            <button class="payment-navigation-btn-active hide">
-              <img
-                src="./img/В подарок.png"
-                alt="Другой аккаунт"
-                draggable="false"
-              />
-            </button>
             <button class="payment-navigation-btn">Организациям</button>
-            <button class="payment-navigation-btn-active hide">
-              <img
-                src="./img/Организациям.png"
-                alt="Организациям"
-                draggable="false"
-              />
-            </button>
             <button class="payment-navigation-btn">Контакты</button>
-            <button class="payment-navigation-btn-active hide">
-              <img src="./img/Контакты.png" alt="Контакты" draggable="false" />
-            </button>
           </div>
           <div class="typing-block">
             <h2 class="typing-block-1" data-text="СКОЛЬКО МИНУТ">
@@ -760,8 +736,30 @@
             </div>   
             
           </div>
-          <div class="user-level">
-            <img
+
+            <div class="progress-container">
+              <div class="progress-top">
+                <p>Ваш уровень</p>
+                <p>На счету:</p>
+              </div>
+              <div class="progress-bar">
+                <svg class="progress-fill" id="progressFill" width="1154" height="100" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style="stop-color:rgba(55, 119, 157, 0.8)"/>
+                      <stop offset="100%" style="stop-color:rgba(55, 119, 157, 0.2)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="" fill="url(#fillGradient)" />
+                </svg>
+              </div>
+              <div class="progress-value" id="progressValue">0%</div>
+              <div class="progress-bottom">
+                <p><b>1</b> 2 3 4</p>
+                <p>777 мин.</p>
+              </div>
+            </div>
+            <!-- <img
             class="level-animation"
                   src="./img/Анимация уровня.png"
                   draggable="false"
@@ -790,8 +788,7 @@
                   src="./img/Анимация уровня-340.png"
                   draggable="false"
                   alt="Анимация уровня"
-                />
-          </div>
+                /> -->
         </div>
 
         <footer class="footer">
