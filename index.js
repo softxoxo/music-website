@@ -107,14 +107,6 @@ function hideFullArrows(arrowElement) {
     arrowElement.classList.add('hide');
 }
 
-// Function to update the calculator value
-function updateCalculatorValue(changeAmount) {
-    let currentValue = parseInt(calculatorValue.textContent);
-    currentValue += changeAmount;
-    if (currentValue < 0) currentValue = 0;
-    calculatorValue.textContent = currentValue + ' минут';
-}
-
 // Add event listeners for left arrow
 changePriceLeft.addEventListener('mouseenter', () => showFullArrows(fullArrowsLeft));
 changePriceLeft.addEventListener('mouseleave', (event) => {
@@ -144,32 +136,37 @@ const microphone = document.querySelector('.microphone');
 const totalPrice = document.querySelector('.price-display-box h1');
 const glowElement = document.querySelector('.microphone-glow');
 const priceCounters = document.querySelectorAll('.price-top .price-counter');
-const activePriceCounter = document.querySelector('.price-counter-active');
+const priceCountersPercent = document.querySelectorAll('.price-bottom .price-counter-percent');
+const activePriceCounter = document.querySelector('.microphone .price-counter-active');
+const activePriceCounterPercent = document.querySelector('.microphone .price-counter-active:last-child');
+const calculatorInput = document.querySelector('.calculator-value input');
 
 let SLIDER_WIDTH = 1160; // Default width, will be updated based on window size
 let SLIDER_HEIGHT = 0; // Will be used for the rotated slider
 let isRotated = false; // Flag to check if the slider is rotated
 
 const PRICE_RANGES = [
-    { max: 1000, price: 5, widthPercentage: 21.55 },
-    { max: 10000, price: 4, widthPercentage: 25 },
-    { max: 50000, price: 3, widthPercentage: 24.14 },
-    { max: 100000, price: 2, widthPercentage: 29.31 }
+    { max: 1000, price: 5, widthPercentage: 22.4, discount: 0 },
+    { max: 10000, price: 4, widthPercentage: 26.7, discount: 20 },
+    { max: 50000, price: 3, widthPercentage: 26.7, discount: 40 },
+    { max: 100000, price: 2, widthPercentage: 23.9, discount: 60 }
 ];
+
+
 
 function updateSliderDimensions() {
     const windowWidth = window.innerWidth;
     if (windowWidth >= 1160) {
         SLIDER_WIDTH = 1120;
         isRotated = false;
-    } else if (windowWidth >= 860) {
+    } else if (windowWidth >= 1000) {
         SLIDER_WIDTH = 850;
         isRotated = false;
-    } else if (windowWidth >= 630) {
+    } else if (windowWidth >= 700) {
         SLIDER_WIDTH = 620;
         isRotated = false;
-    } else if (windowWidth >= 434) {
-        SLIDER_WIDTH = 430;
+    } else if (windowWidth >= 480) {
+        SLIDER_WIDTH = 450;
         isRotated = false;
     } else {
         SLIDER_WIDTH = 300;
@@ -217,14 +214,26 @@ function calculatePrice(minutes) {
     return PRICE_RANGES[PRICE_RANGES.length - 1].price;
 }
 
+function calculateDiscount(minutes) {
+    for (let range of PRICE_RANGES) {
+        if (minutes <= range.max) {
+            return range.discount;
+        }
+    }
+    return PRICE_RANGES[PRICE_RANGES.length - 1].discount;
+}
+
 function updateDisplay(minutes) {
     minutes = Math.max(1, Math.min(minutes, 100000));
-    if (calculatorValue) {
-        calculatorValue.textContent = minutes + ' минут';
+    if (calculatorInput) {
+        calculatorInput.value = minutes;
+        resizeInput.call(calculatorInput)
     }
     const price = calculatePrice(minutes);
+    const discount = calculateDiscount(minutes);
     if (totalPrice) {
-        totalPrice.textContent = (price * minutes).toFixed(2) + ' ₽';
+        const formattedPrice = (price * minutes).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        totalPrice.textContent = formattedPrice;
     }
 
     const position = calculatePosition(minutes);
@@ -233,12 +242,37 @@ function updateDisplay(minutes) {
     if (activePriceCounter) {
         activePriceCounter.textContent = price + '₽';
     }
+    if (activePriceCounterPercent) {
+        activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
+    }
 
     priceCounters.forEach((counter, index) => {
-        if (counter && PRICE_RANGES[index] && price === PRICE_RANGES[index].price) {
-            counter.classList.add('hidden-text');
-        } else if (counter) {
-            counter.classList.remove('hidden-text');
+        if (PRICE_RANGES[index] && price === PRICE_RANGES[index].price) {
+            counter.classList.remove('punch-out', 'settle-back');
+            counter.classList.add('punch-out');
+        } else {
+            if (counter.classList.contains('punch-out')) {
+                counter.classList.add('punch-out');
+                setTimeout(() => {
+                    counter.classList.remove('punch-out');
+                    counter.classList.add('settle-back');
+                }, 300);
+            }
+        }
+    });
+
+    priceCountersPercent.forEach((counter, index) => {
+        if (PRICE_RANGES[index] && price === PRICE_RANGES[index].price) {
+            counter.classList.remove('punch-out', 'settle-back');
+            counter.classList.add('punch-out');
+        } else {
+            if (counter.classList.contains('punch-out')) {
+                counter.classList.add('punch-out');
+                setTimeout(() => {
+                    counter.classList.remove('punch-out');
+                    counter.classList.add('settle-back');
+                }, 300);
+            }
         }
     });
 }
@@ -280,7 +314,7 @@ if (microphone) {
         
         function onMouseMove(e) {
             moveMicrophone({
-                clientX: e.clientX - initialPosition + microphone.offsetWidth / 2,
+                clientX: e.clientX,
                 clientY: e.clientY
             });
         }
@@ -328,6 +362,23 @@ if (triplemLeftArrow) triplemLeftArrow.parentElement.addEventListener('click', (
 if (doublemRightArrow) doublemRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(10));
 if (triplemRightArrow) triplemRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(100));
 
+function handleInputChange(e) {
+    let minutes = parseInt(e.target.value, 10);
+    if (isNaN(minutes) || minutes < 1) {
+        minutes = 1;
+    } else if (minutes > 100000) {
+        minutes = 100000;
+    }
+    updateDisplay(minutes);
+}
+
+// Add event listener for the input field
+if (calculatorInput) {
+    calculatorInput.addEventListener('input', handleInputChange);
+    calculatorInput.addEventListener('blur', function() {
+        this.value = Math.max(1, Math.min(parseInt(this.value, 10) || 1, 100000));
+    });
+}
 // Initialize
 updateSliderDimensions();
 updateDisplay(1200); // Initial value
@@ -430,104 +481,11 @@ const phrases = [
   });
 
 
-  // --------------------------------------------LEVEL--------------------------------------------------//
-  const progressFill = document.getElementById('progressFill');
-  const progressPath = progressFill.querySelector('path');
-  const valueInput = Math.floor(Math.random() * 101);
-  const progressValueElement = document.getElementById("progressValue");
-  
-  let containerWidth, containerHeight;
-  
-  function updateContainerDimensions() {
-      const windowWidth = window.innerWidth;
-      
-      if (windowWidth >= 1160) {
-          containerWidth = 1154;
-          containerHeight = 100;
-      } else if (windowWidth >= 860) {
-          containerWidth = 850;
-          containerHeight = 73;
-      } else if (windowWidth >= 620) {
-          containerWidth = 600;
-          containerHeight = 73;
-      } else if (windowWidth >= 460) {
-          containerWidth = 460;
-          containerHeight = 58;
-      } else {
-          containerWidth = 340;
-          containerHeight = 48;
-      }
-  }
-  
-  function generateVariedPath(width, height) {
-      let path = `M0 ${height} `;
-      const segments = 10;
-      const segmentWidth = width / segments;
-      
-      for (let i = 1; i <= segments; i++) {
-          const x = i * segmentWidth;
-          let y;
-          if (i === segments) {
-              y = 0; // Ensure the last point reaches the top
-          } else {
-              const progress = i / segments;
-              const randomFactor = Math.random() * 0.4 - 0.2; // Random value between -0.2 and 0.2
-              y = height - (progress + randomFactor) * height;
-              y = Math.max(0, Math.min(height, y)); // Clamp y between 0 and height
-          }
-          path += `L${x} ${y} `;
-      }
-      
-      path += `L${width} 0 L${width} ${height} Z`;
-      return path;
-  }
-  
-  function animateProgress(targetValue) {
-      const duration = 1000; // 1 second
-      const startTime = performance.now();
-      const startWidth = parseFloat(progressFill.style.width) || 0;
-      const startValue = 0;
-      
-      const targetWidth = (targetValue / 100) * containerWidth;
-      const targetHeight = (targetValue / 100) * containerHeight;
-      
-      const variedPath = generateVariedPath(targetWidth, targetHeight);
-      
-      function step(currentTime) {
-          const elapsedTime = currentTime - startTime;
-          const progress = Math.min(elapsedTime / duration, 1);
-          
-          const currentWidth = startWidth + (targetWidth - startWidth) * progress;
-          const currentValue = Math.round(startValue + (targetValue - startValue) * progress);
-  
-          progressPath.setAttribute('d', variedPath);
-          progressFill.setAttribute('viewBox', `0 0 ${currentWidth} ${targetHeight}`);
-          progressFill.style.width = `${currentWidth}px`;
-          progressFill.style.height = `${targetHeight}px`;
-          
-          progressValueElement.innerHTML = `${currentValue}%`;
-          
-          if (progress < 1) {
-              requestAnimationFrame(step);
-          }
-      }
-      
-      requestAnimationFrame(step);
-  }
-  
-  function updateProgress() {
-      updateContainerDimensions(); // Update dimensions before animating
-      const targetValue = Math.min(Math.max(parseInt(valueInput) || 0, 0), 100);
-      progressFill.style.width = '0';
-      // Set initial height based on the target value
-      const initialHeight = (targetValue / 100) * containerHeight;
-      progressFill.style.height = `${initialHeight}px`;
-      progressValueElement.innerHTML = "0%"; // Reset the progress value to 0%
-      setTimeout(() => animateProgress(targetValue), 50); // Small delay to ensure reset is visible
-  }
-  
-  // Initial update
-  updateProgress();
-  
-  // Update on window resize
-  window.addEventListener('resize', updateProgress);
+  // ------------------------------------- RESIZE INPUT------------------------------------------------//
+
+  calculatorInput.addEventListener('input', resizeInput); 
+resizeInput.call(calculatorInput); 
+
+function resizeInput() {
+  this.style.width = this.value.length + "ch";
+}

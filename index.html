@@ -22,17 +22,12 @@
               />
           </div>
           <nav class="menu">
-            <a href="#" class="menu-item">О нас</a>
-            <a href="#" class="menu-item">Компаниям</a>
-            <a href="#" class="menu-item">FAQ</a>
             <a href="#" class="menu-item">Блог</a>
-            <a href="#" class=""
-              ><img
-              src="./img/Стоимость.png"
-              alt="Стоимость"
-              draggable="false"
-            />
+            <a href="#" class="menu-item">FAQ</a>
+            <a href="#" class="menu-item-active"
+              >Стоимость
             </a>
+            <a href="#" class="menu-item">Компаниям</a>
           </nav>
           <div class="end-block">
             <div class="currency-lang-nav">
@@ -217,11 +212,34 @@
             </linearGradient>
             </defs>
             </svg>
-            <img
-            src="./img/стоимость-телефон.png"
-            alt="Другой аккаунт"
-            draggable="false"
-          />
+            <svg width="288" height="54" viewBox="0 0 288 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g filter="url(#filter0_dd_237_2542)">
+              <path d="M50.5 10.674H32.208V23.492H50.5V29H26.7V5.2H50.5V10.674ZM79.3934 5.2V10.708H70.2474V29H64.7394V10.708H55.5934V5.2H79.3934ZM84.4867 5.2H108.287V29H84.4867V5.2ZM89.9947 23.492H102.779V10.674H89.9947V23.492ZM130.55 5.2H137.18V29H131.672V12.782L119.976 29H113.38V5.2H118.888V21.384L130.55 5.2ZM159.477 5.2H166.073V29H160.565V12.816L157.471 17.1L154.173 21.69L150.875 17.1L147.781 12.816V29H142.273V5.2H148.869L154.173 12.544L159.477 5.2ZM171.167 5.2H194.967V29H171.167V5.2ZM176.675 23.492H189.459V10.674H176.675V23.492ZM223.86 10.674H205.568V23.492H223.86V29H200.06V5.2H223.86V10.674ZM252.754 5.2V10.708H243.608V29H238.1V10.708H228.954V5.2H252.754ZM263.355 14.346H281.647V29H257.847V5.2H263.355V14.346ZM263.355 23.492H276.173V19.854H263.355V23.492Z" fill="url(#paint0_linear_237_2542)"/>
+              </g>
+              <defs>
+              <filter id="filter0_dd_237_2542" x="0.699951" y="0.199951" width="287.147" height="53.8" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dx="-11" dy="10"/>
+              <feGaussianBlur stdDeviation="7.5"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.9 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_237_2542"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dx="-2" dy="4"/>
+              <feGaussianBlur stdDeviation="4.1"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
+              <feBlend mode="normal" in2="effect1_dropShadow_237_2542" result="effect2_dropShadow_237_2542"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_237_2542" result="shape"/>
+              </filter>
+              <linearGradient id="paint0_linear_237_2542" x1="14.7955" y1="5" x2="83.8565" y2="145.527" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#262626"/>
+              <stop offset="0.5" stop-color="#E8E8E8"/>
+              <stop offset="1" stop-color="#262626"/>
+              </linearGradient>
+              </defs>
+              </svg>              
           <img
           src="./img/бургер.png"
           alt="Другой аккаунт"
@@ -479,6 +497,7 @@
               <p class="price-counter">4₽</p>
               <p class="price-counter">3₽</p>
               <p class="price-counter">2₽</p>
+              <p class="price-counter"></p>
             </div>
             <div class="price-middle">
               <img
@@ -514,25 +533,28 @@
             <div class="microphone">
               <p class="price-counter-active">5₽</p>
               <img
-                src="./img/микрофон.png"
-                alt="microphone"
-                draggable="false"
-                class="microphone"
+              src="./img/микрофон.png"
+              alt="microphone"
+              draggable="false"
+              class="microphone"
               />
+              <p class="price-counter-active">-10%</p>
             </div>
               <div class="price-slider">
                 <div class="microphone-glow"></div>
-                <p>0</p>
+                <p></p>
                 <p>1000</p>
                 <p>10000</p>
                 <p>50000</p>
-                <p>∞</p>
+                <p></p>
               </div>
             </div>
             <div class="price-bottom">
+              <p class="price-counter-percent"></p>
               <p class="price-counter-percent">-20%</p>
               <p class="price-counter-percent">-40%</p>
               <p class="price-counter-percent">-60%</p>
+              <p class="price-counter-percent"></p>
             </div>
           </div>
           <div class="calculator-box">
@@ -623,11 +645,6 @@
                 </button>
 
                 <div class="full-arrows-left hide">
-                  <img class="arrows-bg"
-                  src="./img/arrows/background.png"
-                  draggable="false"
-                  alt="arrow right"
-                />
                   <div class="arrows-container">
 
 <button>
@@ -647,8 +664,9 @@
                   </div>
                 </div>
                 <div class="calculator-value">
-                  <div class="calculator-value-numb">1 минут</div>
-                </div>
+                  <input type="number" value="1" min="1" max="100000" class="calculator-value-numb" >
+                  <div class="calculator-value-numb">минут</div>
+              </div>
                 <button class="change-price-right">
                   <img 
                     src="./img/arrows/arrow-right.png"
@@ -673,11 +691,6 @@
                   </button>
                 </div>
                 <div class="full-arrows-right hide">
-                  <img class="arrows-bg"
-                  src="./img/arrows/background.png"
-                  draggable="false"
-                  alt="arrow right"
-                />
                   <div class="arrows-container">
 <button>
   <img class="full-arrows-right-double"
@@ -703,7 +716,7 @@
               alt="bg"
             />
               <h3>Итого</h3>
-              <h1>3.50 ₽</h1>
+              <h1>3</h1>
               <div class="currency-display">
                 <img
                 width="64px"
@@ -714,6 +727,7 @@
                   <img
                   width="64px"
                   class="hide"
+                  style="opacity: 0.5;"
                     src="./img/евро.png"
                     draggable="false"
                     alt="евро"
@@ -732,250 +746,16 @@
                   draggable="false"
                   alt="Купить"
                 />
+                <img
+                  src="./img/buy-button-mob.png"
+                  draggable="false"
+                  alt="Купить"
+                />
+
               </button>
             </div>   
             
           </div>
-
-            <div class="progress-container">
-              <div class="progress-top">
-                <p>Ваш уровень</p>
-                <p>На счету:</p>
-              </div>
-              <div class="progress-bar">
-                <svg class="progress-fill" id="progressFill" width="1154" height="100" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style="stop-color:rgba(55, 119, 157, 0.8)"/>
-                      <stop offset="100%" style="stop-color:rgba(55, 119, 157, 0.2)"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="" fill="url(#fillGradient)" />
-                </svg>
-              </div>
-              <div class="progress-value" id="progressValue">0%</div>
-              <div class="progress-bottom">
-                <p><b>1</b> 2 3 4</p>
-                <p>777 мин.</p>
-              </div>
-            </div>
-            <!-- <img
-            class="level-animation"
-                  src="./img/Анимация уровня.png"
-                  draggable="false"
-                  alt="Анимация уровня"
-                />
-                <img
-                class="level-animation-850"
-                      src="./img/Анимация уровня-850.png"
-                      draggable="false"
-                      alt="Анимация уровня"
-                    />
-            <img
-            class="level-animation-600"
-                  src="./img/Анимация уровня-600.png"
-                  draggable="false"
-                  alt="Анимация уровня"
-                />
-            <img
-            class="level-animation-460"
-                  src="./img/Анимация уровня-460.png"
-                  draggable="false"
-                  alt="Анимация уровня"
-                />
-            <img
-            class="level-animation-340"
-                  src="./img/Анимация уровня-340.png"
-                  draggable="false"
-                  alt="Анимация уровня"
-                /> -->
-        </div>
-
-        <footer class="footer">
-          <div class="logo">
-            <img
-                src="./img/logo.png"
-                alt="Лого"
-                draggable="false"
-              />
-          </div>
-          <nav class="menu">
-            <a href="#" class="menu-item">Главная</a>
-            <a href="#" class="menu-item">О нас</a>
-            <a href="#" class="menu-item">Компаниям</a>
-            <a href="#" class="menu-item">FAQ</a>
-            <a href="#" class=""
-              ><svg
-                width="134"
-                height="32"
-                viewBox="0 0 134 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g filter="url(#filter0_di_99_864)">
-                  <path
-                    d="M23 12.22H12.24V19.76H23V23H9V9H23V12.22ZM35.9961 11.8V14.392H31.6921V23H29.1001V14.392H24.7961V11.8H35.9961ZM37.593 11.8H48.793V23H37.593V11.8ZM40.185 20.408H46.201V14.376H40.185V20.408ZM58.4698 11.8H61.5898V23H58.9978V15.368L53.4938 23H50.3898V11.8H52.9818V19.416L58.4698 11.8ZM71.2827 11.8H74.3867V23H71.7947V15.384L70.3387 17.4L68.7867 19.56L67.2347 17.4L65.7787 15.384V23H63.1867V11.8H66.2907L68.7867 15.256L71.2827 11.8ZM75.9836 11.8H87.1836V23H75.9836V11.8ZM78.5756 20.408H84.5916V14.376H78.5756V20.408ZM99.9805 14.376H91.3725V20.408H99.9805V23H88.7805V11.8H99.9805V14.376ZM112.777 11.8V14.392H108.473V23H105.881V14.392H101.577V11.8H112.777ZM116.966 16.104H125.574V23H114.374V11.8H116.966V16.104ZM116.966 20.408H122.998V18.696H116.966V20.408Z"
-                    fill="url(#paint0_linear_99_864)"
-                  />
-                </g>
-                <defs>
-                  <filter
-                    id="filter0_di_99_864"
-                    x="0.8"
-                    y="0.8"
-                    width="132.974"
-                    height="30.4"
-                    filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
-                  >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                    <feColorMatrix
-                      in="SourceAlpha"
-                      type="matrix"
-                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                      result="hardAlpha"
-                    />
-                    <feOffset />
-                    <feGaussianBlur stdDeviation="4.1" />
-                    <feComposite in2="hardAlpha" operator="out" />
-                    <feColorMatrix
-                      type="matrix"
-                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"
-                    />
-                    <feBlend
-                      mode="normal"
-                      in2="BackgroundImageFix"
-                      result="effect1_dropShadow_99_864"
-                    />
-                    <feBlend
-                      mode="normal"
-                      in="SourceGraphic"
-                      in2="effect1_dropShadow_99_864"
-                      result="shape"
-                    />
-                    <feColorMatrix
-                      in="SourceAlpha"
-                      type="matrix"
-                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                      result="hardAlpha"
-                    />
-                    <feOffset dx="1" dy="1" />
-                    <feGaussianBlur stdDeviation="1" />
-                    <feComposite
-                      in2="hardAlpha"
-                      operator="arithmetic"
-                      k2="-1"
-                      k3="1"
-                    />
-                    <feColorMatrix
-                      type="matrix"
-                      values="0 0 0 0 0.945833 0 0 0 0 0.945833 0 0 0 0 0.945833 0 0 0 0.46 0"
-                    />
-                    <feBlend
-                      mode="normal"
-                      in2="shape"
-                      result="effect2_innerShadow_99_864"
-                    />
-                  </filter>
-                  <linearGradient
-                    id="paint0_linear_99_864"
-                    x1="8.00001"
-                    y1="3"
-                    x2="39.1281"
-                    y2="79.3334"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stop-color="#08466B" />
-                    <stop offset="0.19" stop-color="#37779D" />
-                    <stop offset="0.43179" stop-color="#71BDEB" />
-                    <stop offset="0.76" stop-color="#37779D" />
-                    <stop offset="1" stop-color="#08466B" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </a>
-          </nav>
-          <div class="end-block">
-            <button class="registration">
-              <svg
-                width="215"
-                height="21"
-                viewBox="0 0 215 21"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0.35078 0.199999H17.1508V10.544H4.23878V17H0.35078V0.199999ZM13.2628 6.656V4.088H4.23878V6.656H13.2628ZM36.8261 4.088H23.9141V6.656H36.8261V10.544H23.9141V13.112H36.8261V17H20.0261V0.199999H36.8261V4.088ZM56.5014 0.199999V4.064H43.5894V17H39.7014V0.199999H56.5014ZM71.4967 0.199999H76.1767V17H72.2887V5.552L64.0327 17H59.3767V0.199999H63.2647V11.624L71.4967 0.199999ZM95.852 4.064H82.94V13.112H95.852V17H79.052V0.199999H95.852V4.064ZM115.527 0.199999V4.088H109.071V17H105.183V4.088H98.7273V0.199999H115.527ZM118.403 0.199999H135.203V10.544H122.291V17H118.403V0.199999ZM131.315 6.656V4.088H122.291V6.656H131.315ZM138.078 0.199999H154.878V17H150.99V10.544H141.966V17H138.078V0.199999ZM150.99 6.656V4.064H141.966V6.656H150.99ZM174.553 13.112H176.497V20.864H172.609V17H157.753V0.199999H161.641V13.112H170.665V0.199999H174.553V13.112ZM190.299 0.199999H194.979V17H191.091V5.552L182.835 17H178.179V0.199999H182.067V11.624L190.299 0.199999ZM197.854 0.199999H214.654V17H210.766V10.544H207.19L202.51 17H197.854L202.534 10.544H197.854V0.199999ZM201.742 6.656H210.766V4.088H201.742V6.656Z"
-                  fill="url(#paint0_radial_99_865)"
-                />
-                <defs>
-                  <radialGradient
-                    id="paint0_radial_99_865"
-                    cx="0"
-                    cy="0"
-                    r="1"
-                    gradientUnits="userSpaceOnUse"
-                    gradientTransform="translate(94.6919 8.16) rotate(-3.03907) scale(153.913 10.793)"
-                  >
-                    <stop stop-color="#FB3F79" />
-                    <stop offset="1" stop-color="#900F37" />
-                  </radialGradient>
-                </defs>
-              </svg>
-            </button>
-          </div>
-        </footer>
-      </div>
-      <div class="logo-container">
-        <div class="logo-footer">
-          <svg
-            width="164"
-            height="30"
-            viewBox="0 0 164 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.3947 0H0V29.9967H18.0114C22.339 29.6824 25.7529 26.096 25.7529 21.7153V20.6887C25.7529 18.1464 24.2102 15.468 22.0051 14.5164C24.2102 13.5631 25.7529 11.3806 25.7529 8.83836V7.9112C25.7529 3.32267 22.0104 0 17.3947 0ZM20.5889 22.3002C20.5889 24.3797 18.8934 26.0646 16.8008 26.0646H4.84942V16.4493H16.8008C18.8934 16.4493 20.5889 18.1342 20.5889 20.2138V22.3002ZM20.5889 8.87158C20.5889 10.6891 19.106 12.1645 17.2752 12.1645H4.84942V4.27773H17.2752C19.1042 4.27773 20.5889 5.75141 20.5889 7.57077V8.87158Z"
-              fill="#848484"
-            />
-            <path
-              d="M82.526 20.9802C81.4256 17.785 78.7183 16.4178 75.8488 16.4178C74.8 16.4178 73.6421 16.4265 72.5983 16.437C72.5527 16.4353 72.5087 16.4335 72.4613 16.4318C70.0595 16.3515 68.8787 15.6636 68.8787 13.9245C68.8787 12.1855 70.2229 11.3387 72.0941 11.3387C76.1651 11.3387 82.6784 11.3387 82.6784 11.3387C82.6784 11.3387 82.3637 9.41797 80.3644 8.07007C78.6708 6.92818 77.7591 6.42531 70.7517 6.88626C66.2976 7.17959 63.7499 12.5399 64.8498 15.7368C65.9497 18.9321 68.5818 20.4843 71.4492 20.4843C72.6405 20.4843 73.8898 20.4476 74.9774 20.4022C77.3794 20.4826 78.4949 21.0535 78.4949 22.7926C78.4949 24.5316 77.1507 25.3784 75.2796 25.3784H73.0675V25.3749C69.1072 25.3749 64.1821 25.3749 64.1821 25.3749C64.1821 25.3749 64.4967 27.2955 66.4961 28.6434C67.8421 29.5514 68.6995 30.0543 72.5105 29.9914C73.6227 30.0106 74.9634 29.9634 76.6217 29.8308C81.0723 29.4711 83.6241 24.1754 82.526 20.9802Z"
-              fill="#848484"
-            />
-            <path
-              d="M96.8136 25.6071H90.1258C88.7432 25.6071 88.1666 24.6258 87.9084 23.3267L87.8715 22.988H96.2249C96.1751 22.5358 96.1471 22.0784 96.1471 21.614V19.6549C96.1471 19.1764 96.1773 18.7051 96.2301 18.2406H87.9069C88.1635 16.9399 88.7394 15.9603 90.1243 15.9603H96.7094C97.2211 14.326 98.3751 12.8384 99.4695 11.5708H89.9077C86.5099 11.5708 83.7551 14.3085 83.7551 17.6854V23.8855C83.7551 27.2623 86.5099 30.0001 89.9077 30.0001H99.7336C98.5827 28.743 97.3751 27.2518 96.8136 25.6071Z"
-              fill="#848484"
-            />
-            <path
-              d="M139.573 11.3125H137.892C132.7 11.3125 128.491 15.4942 128.491 20.6537C128.491 25.8132 132.7 29.9949 137.892 29.9949H139.573C144.765 29.9949 148.973 25.8132 148.973 20.6537C148.973 15.496 144.765 11.3125 139.573 11.3125ZM144.085 20.6555C144.085 23.3146 142.191 25.4692 139.852 25.4692H137.61C135.274 25.4692 133.378 23.3146 133.378 20.6555C133.378 17.9962 135.272 15.8416 137.61 15.8416H139.852C142.191 15.8416 144.085 17.9962 144.085 20.6555Z"
-              fill="#848484"
-            />
-            <path
-              d="M162.264 11.8358H150.084V29.9962H154.459V18.8863C154.459 17.5086 155.584 16.3912 156.97 16.3912H163.768L162.264 11.8358Z"
-              fill="#848484"
-            />
-            <path
-              d="M113.935 25.5794H108.795C106.229 25.5794 104.226 23.3148 104.226 20.7656C104.226 18.2164 106.306 15.9518 108.872 15.9518H113.143L115.033 11.5344H108.118C103.361 11.5344 99.5068 15.3652 99.5068 20.0916V21.4413C99.5068 26.0543 103.181 29.8135 107.779 29.9898V29.9986H108.118H111.023H116.877C115.716 28.7344 114.501 27.2329 113.935 25.5794Z"
-              fill="#848484"
-            />
-            <path
-              d="M126.691 25.579H125.705H125.458C124.737 25.579 124.152 24.9975 124.152 24.2816V17.7271V16.1486H125.539L127.403 11.5951H124.152V8.27411H119.57V11.5951H118.291L116.427 16.1486H119.57V24.5017V24.5365C119.57 27.5519 122.03 29.9963 125.064 29.9963H125.705H129.995C128.573 28.8091 127.432 27.2987 126.691 25.579Z"
-              fill="#848484"
-            />
-            <path
-              d="M63.1958 8.83797V7.91082C63.1958 3.32401 59.4533 0.00134277 54.8375 0.00134277H37.4675H37.4447H27.3399C28.3607 1.28123 29.1198 2.64834 29.5362 4.27735H37.3936V13.5208L27.1326 23.7159V29.9981H37.4692H55.4578C59.7854 29.6838 63.1992 26.0975 63.1992 21.7167V20.69C63.1992 18.1478 61.6566 15.4694 59.4515 14.5178C61.6531 13.5627 63.1958 11.3802 63.1958 8.83797ZM37.3919 26.0625H30.4587L37.3919 19.1727V26.0625ZM58.0336 22.2998C58.0336 24.3793 56.338 26.0642 54.2454 26.0642H42.2941V16.4489H54.2454C56.338 16.4489 58.0336 18.1338 58.0336 20.2134V22.2998ZM58.0336 8.8712C58.0336 10.6888 56.5506 12.1642 54.7198 12.1642H42.2941V4.27735H54.7198C56.5489 4.27735 58.0336 5.75103 58.0336 7.57039V8.8712Z"
-              fill="#848484"
-            />
-            <path
-              d="M30.7239 6.8844C28.7401 6.8844 27.1307 8.48371 27.1307 10.455C27.1307 12.4263 28.7401 14.0256 30.7239 14.0256C32.7075 14.0256 34.317 12.4263 34.317 10.455C34.317 8.48371 32.7075 6.8844 30.7239 6.8844ZM30.7239 11.7593C29.9982 11.7593 29.4113 11.1761 29.4113 10.455C29.4113 9.73389 29.9982 9.15069 30.7239 9.15069C31.4495 9.15069 32.0364 9.73389 32.0364 10.455C32.0364 11.1743 31.4477 11.7593 30.7239 11.7593Z"
-              fill="#848484"
-            />
-            <path
-              d="M30.7229 11.7595C29.9972 11.7595 29.4104 11.1764 29.4104 10.4553C29.4104 9.73413 29.9972 9.151 30.7229 9.151C31.4486 9.151 32.0354 9.73413 32.0354 10.4553C32.0354 11.1746 31.4468 11.7595 30.7229 11.7595Z"
-              fill="#0BCFF7"
-            />
-          </svg>
         </div>
       </div>
     </div>
