@@ -663,4 +663,12 @@ border-radius: 5px;
 	.progress-bottom p b {
 		font-size: 16px;
 	}
+		.punch-out,
+		.settle-back {
+			animation: none;
+		}
+	
+		.active {
+			opacity: 1;
+		}
  }

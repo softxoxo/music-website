@@ -140,6 +140,21 @@ const priceCountersPercent = document.querySelectorAll('.price-bottom .price-cou
 const activePriceCounter = document.querySelector('.microphone .price-counter-active');
 const activePriceCounterPercent = document.querySelector('.microphone .price-counter-active:last-child');
 const calculatorInput = document.querySelector('.calculator-value input');
+const styles = `
+.microphone, .microphone-glow {
+    transition: none;
+}
+
+.microphone.smooth-transition, .microphone-glow.smooth-transition {
+    transition: left 0.2s ease-out, top 0.2s ease-out;
+}
+`;
+
+// Add the styles to the document
+const styleSheet = document.createElement("style");
+styleSheet.type = "text/css";
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
 
 let SLIDER_WIDTH = 1160; // Default width, will be updated based on window size
 let SLIDER_HEIGHT = 0; // Will be used for the rotated slider
@@ -181,13 +196,15 @@ function updateSliderDimensions() {
     });
 }
 
-function updatePositions(position) {
+function updatePositions(position, smooth = false) {
     if (glowElement) {
+        glowElement.classList.toggle('smooth-transition', smooth);
         glowElement.style.left = `${position}px`;
         glowElement.style.top = '50%';
     }
     
     if (microphone) {
+        microphone.classList.toggle('smooth-transition', smooth);
         microphone.style.left = `${position}px`;
     }
 }
@@ -223,11 +240,11 @@ function calculateDiscount(minutes) {
     return PRICE_RANGES[PRICE_RANGES.length - 1].discount;
 }
 
-function updateDisplay(minutes) {
+function updateDisplay(minutes, smooth = false) {
     minutes = Math.max(1, Math.min(minutes, 100000));
     if (calculatorInput) {
         calculatorInput.value = minutes;
-        resizeInput.call(calculatorInput)
+        resizeInput.call(calculatorInput);
     }
     const price = calculatePrice(minutes);
     const discount = calculateDiscount(minutes);
@@ -237,7 +254,7 @@ function updateDisplay(minutes) {
     }
 
     const position = calculatePosition(minutes);
-    updatePositions(position);
+    updatePositions(position, smooth);
 
     if (activePriceCounter) {
         activePriceCounter.textContent = price + '₽';
@@ -290,7 +307,7 @@ function calculatePosition(minutes) {
     return SLIDER_WIDTH;
 }
 
-function moveMicrophone(e) {
+function moveMicrophone(e, smooth = false) {
     if (!slider) return;
     const rect = slider.getBoundingClientRect();
     let position;
@@ -302,21 +319,19 @@ function moveMicrophone(e) {
         position = Math.max(0, Math.min(position, SLIDER_WIDTH));
     }
     
+    // Directly update microphone position for instant movement
+    updatePositions(position, smooth);
+    
     const minutes = calculateMinutes(position);
-    updateDisplay(minutes);
+    updateDisplay(minutes, smooth);
 }
 
 if (microphone) {
     microphone.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        const initialPosition = 
-            e.clientX - microphone.getBoundingClientRect().left;
         
         function onMouseMove(e) {
-            moveMicrophone({
-                clientX: e.clientX,
-                clientY: e.clientY
-            });
+            moveMicrophone(e, false);  // No smooth transition during drag
         }
         
         document.addEventListener('mousemove', onMouseMove);
@@ -328,7 +343,7 @@ if (microphone) {
 
 if (slider) {
     slider.addEventListener('click', (e) => {
-        moveMicrophone(e);
+        moveMicrophone(e, true);  // Smooth transition on direct slider click
     });
 }
 
