@@ -92,35 +92,42 @@ const fullArrowsRight = document.querySelector('.full-arrows-right');
 const calculatorValue = document.querySelector('.calculator-value-numb');
 
 // Get the double and triple arrow buttons
-const doubleLeftButton = fullArrowsLeft.querySelector('.full-arrows-left-double').parentElement;
-const tripleLeftButton = fullArrowsLeft.querySelector('.full-arrows-left-triple').parentElement;
-const doubleRightButton = fullArrowsRight.querySelector('.full-arrows-right-double').parentElement;
-const tripleRightButton = fullArrowsRight.querySelector('.full-arrows-right-triple').parentElement;
+const doubleRightButton = fullArrowsRight.querySelector('.double-right');
+const tripleRightButton = fullArrowsRight.querySelector('.triple-right');
+const tripleLeftButton = fullArrowsLeft.querySelector('.triple-left');
+const doubleLeftButton = fullArrowsLeft.querySelector('.double-left');
 
-// Function to show full arrows
 function showFullArrows(arrowElement) {
     arrowElement.classList.remove('hide');
-}
-
-// Function to hide full arrows
-function hideFullArrows(arrowElement) {
-    arrowElement.classList.add('hide');
-}
+    setTimeout(() => {
+      arrowElement.classList.add('show');
+    }, 10); // Small delay to ensure the transition works
+  }
+  
+  function hideFullArrows(arrowElement) {
+    arrowElement.classList.remove('show');
+    arrowElement.addEventListener('transitionend', function onTransitionEnd() {
+      if (!arrowElement.classList.contains('show')) {
+        arrowElement.classList.add('hide');
+      }
+      arrowElement.removeEventListener('transitionend', onTransitionEnd);
+    });
+  }
 
 // Add event listeners for left arrow
 changePriceLeft.addEventListener('mouseenter', () => showFullArrows(fullArrowsLeft));
 changePriceLeft.addEventListener('mouseleave', (event) => {
-    if (!fullArrowsLeft.contains(event.relatedTarget)) {
-        hideFullArrows(fullArrowsLeft);
-    }
+  if (!fullArrowsLeft.contains(event.relatedTarget)) {
+    hideFullArrows(fullArrowsLeft);
+  }
 });
 
 // Add event listeners for right arrow
 changePriceRight.addEventListener('mouseenter', () => showFullArrows(fullArrowsRight));
 changePriceRight.addEventListener('mouseleave', (event) => {
-    if (!fullArrowsRight.contains(event.relatedTarget)) {
-        hideFullArrows(fullArrowsRight);
-    }
+  if (!fullArrowsRight.contains(event.relatedTarget)) {
+    hideFullArrows(fullArrowsRight);
+  }
 });
 
 // Add event listeners for full arrows to keep them visible
@@ -129,6 +136,17 @@ fullArrowsLeft.addEventListener('mouseleave', () => hideFullArrows(fullArrowsLef
 fullArrowsRight.addEventListener('mouseenter', () => showFullArrows(fullArrowsRight));
 fullArrowsRight.addEventListener('mouseleave', () => hideFullArrows(fullArrowsRight));
 
+// Function to update calculator value
+function updateCalculatorValue(increment) {
+  let currentValue = parseInt(calculatorValue.textContent);
+  calculatorValue.textContent = currentValue + increment;
+}
+
+// Add click events for double and triple buttons
+doubleLeftButton.addEventListener('click', () => updateCalculatorValue(-10));
+tripleLeftButton.addEventListener('click', () => updateCalculatorValue(-100));
+doubleRightButton.addEventListener('click', () => updateCalculatorValue(10));
+tripleRightButton.addEventListener('click', () => updateCalculatorValue(100));
 
 // ----------------------------------------------------------MICROPHONE--------------------------------------------------------//
 const slider = document.querySelector('.price-slider');
@@ -147,6 +165,9 @@ const styles = `
 
 .microphone.smooth-transition, .microphone-glow.smooth-transition {
     transition: left 0.2s ease-out, top 0.2s ease-out;
+}
+.price-counter, .price-counter-percent {
+    transition: transform 0.2s ease-out;
 }
 `;
 
@@ -504,3 +525,46 @@ resizeInput.call(calculatorInput);
 function resizeInput() {
   this.style.width = this.value.length + "ch";
 }
+
+//------------------------------------------LADDER NAV ------------------------------------------------//
+document.querySelectorAll('.payment-navigation-btn').forEach((btn) => {
+    const text = btn.textContent.trim();
+    const wordSpan = btn.querySelector('.word');
+    const cloneSpan = btn.querySelector('.word-clone');
+    wordSpan.textContent = '';
+    cloneSpan.textContent = '';
+    
+    text.split('').forEach((char, charIndex) => {
+        const letterSpan = document.createElement('span');
+        letterSpan.textContent = char;
+        letterSpan.className = char === ' ' ? 'space' : 'letter';
+        letterSpan.style.transitionDelay = `${charIndex * 30}ms`;
+        
+        const cloneLetterSpan = letterSpan.cloneNode(true);
+        
+        wordSpan.appendChild(letterSpan);
+        cloneSpan.appendChild(cloneLetterSpan);
+    });
+});
+
+//--------------------------------------------CALCULATOR BOX ANIMATION -----------------------------------//
+document.addEventListener('DOMContentLoaded', function() {
+    const calculatorBox = document.querySelector('.calculator-box');
+    const buyButton = document.querySelector('.buy-button');
+  
+    // Initially hide both elements
+    calculatorBox.style.opacity = '0';
+    buyButton.style.opacity = '0';
+  
+    // Show calculator box after 1 second
+    setTimeout(function() {
+      calculatorBox.style.transition = 'opacity 0.5s ease-in';
+      calculatorBox.style.opacity = '1';
+    }, 800);
+  
+    // Show buy button after 1.5 seconds
+    setTimeout(function() {
+      buyButton.style.transition = 'opacity 0.5s ease-in';
+      buyButton.style.opacity = '1';
+    }, 1500);
+  });
