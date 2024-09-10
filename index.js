@@ -267,8 +267,11 @@ function updateDisplay(minutes, smooth = false) {
         calculatorInput.value = minutes;
         resizeInput.call(calculatorInput);
     }
-    const price = calculatePrice(minutes);
-    const discount = calculateDiscount(minutes);
+    
+    const currentRange = PRICE_RANGES.find(range => minutes <= range.max) || PRICE_RANGES[PRICE_RANGES.length - 1];
+    const price = currentRange.price;
+    const discount = currentRange.discount;
+
     if (totalPrice) {
         const formattedPrice = (price * minutes).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         totalPrice.textContent = formattedPrice;
@@ -284,37 +287,61 @@ function updateDisplay(minutes, smooth = false) {
         activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
     }
 
-    priceCounters.forEach((counter, index) => {
-        if (PRICE_RANGES[index] && price === PRICE_RANGES[index].price) {
-            counter.classList.remove('punch-out', 'settle-back');
-            counter.classList.add('punch-out');
-        } else {
-            if (counter.classList.contains('punch-out')) {
-                counter.classList.add('punch-out');
-                setTimeout(() => {
-                    counter.classList.remove('punch-out');
-                    counter.classList.add('settle-back');
-                }, 300);
-            }
-        }
-    });
+    // Convert NodeList to Array and find the previous active index
+    const priceCountersArray = Array.from(document.querySelectorAll('.price-counter'));
+    const newActiveIndex = PRICE_RANGES.findIndex(range => range.price === price);
+    
+    if (newActiveIndex !== lastActiveIndex) {
+        const isMovingForward = newActiveIndex > lastActiveIndex;
+        
+        priceCountersArray.forEach((counter, index) => {
+            updatePriceCounter(counter, index, newActiveIndex, isMovingForward);
+        });
 
-    priceCountersPercent.forEach((counter, index) => {
-        if (PRICE_RANGES[index] && price === PRICE_RANGES[index].price) {
-            counter.classList.remove('punch-out', 'settle-back');
-            counter.classList.add('punch-out');
-        } else {
-            if (counter.classList.contains('punch-out')) {
-                counter.classList.add('punch-out');
-                setTimeout(() => {
-                    counter.classList.remove('punch-out');
-                    counter.classList.add('settle-back');
-                }, 300);
-            }
-        }
-    });
+        const priceCountersPercentArray = Array.from(document.querySelectorAll('.price-counter-percent'));
+        priceCountersPercentArray.forEach((counter, index) => {
+            updatePriceCounter(counter, index, newActiveIndex, isMovingForward);
+        });
+
+        lastActiveIndex = newActiveIndex;
+    }
 }
 
+let lastActiveIndex = -1; // Add this at the top of your script
+
+function updatePriceCounter(counter, index, newActiveIndex, isMovingForward) {
+    const isPriceMatch = index === newActiveIndex;
+
+    if (isPriceMatch) {
+        if (!counter.classList.contains('active') && isMovingForward) {
+            counter.classList.remove('settle-back');
+            counter.classList.add('active', 'punch-out');
+            setTimeout(() => {
+                counter.classList.remove('punch-out');
+                counter.classList.add('settle-back');
+            }, 300);
+        } 
+    } else {
+        counter.classList.remove('active', 'punch-out', 'settle-back');
+    }
+}
+
+// Update the moveMicrophone function to use updateDisplay
+function moveMicrophone(e, smooth = false) {
+    if (!slider) return;
+    const rect = slider.getBoundingClientRect();
+    let position;
+    if (isRotated) {
+        position = e.clientY - rect.top;
+        position = Math.max(0, Math.min(position, SLIDER_HEIGHT));
+    } else {
+        position = e.clientX - rect.left;
+        position = Math.max(0, Math.min(position, SLIDER_WIDTH));
+    }
+    
+    const minutes = calculateMinutes(position);
+    updateDisplay(minutes, smooth);
+}
 function calculatePosition(minutes) {
     let accumulatedWidth = 0;
     for (let range of PRICE_RANGES) {

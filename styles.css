@@ -333,7 +333,6 @@ white-space: nowrap;
 .payment-navigation-btn-active:hover .word-clone .letter {
     transform: none;
 }
-
 .payment-navigation-btn-active {
     background: linear-gradient(106.42deg, #08466B 5.81%, #37779D 23.99%, #71BDEB 47.13%, #37779D 78.54%, #08466B 101.51%);
 -webkit-background-clip: text;
@@ -598,7 +597,7 @@ height: 90px;
   }
   
   .full-arrows-right {
-    margin-left: 345px;
+    margin-left: 335px;
   }
   
   .full-arrows-left {
@@ -631,7 +630,8 @@ height: 90px;
   }
 
   .change-price-right > .image-container img {
-    transform: translateX(35%);
+    transform: translateX(36%);
+    margin-left: -4px;
   }
 
   .double-right > .image-container img {
@@ -643,7 +643,7 @@ height: 90px;
   }
 
   .change-price-left > .image-container img {
-    transform: translateX(-42%);
+    transform: translateX(-47%);
   }
 
   .double-left > .image-container img {
@@ -1022,4 +1022,9 @@ filter: drop-shadow(-2px 4px 4px rgba(0, 0, 0, 1));
 
 .active {
     opacity: 0;
+}
+
+body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1) {
+    max-width: 360px;
+    max-height: 170px;
 }

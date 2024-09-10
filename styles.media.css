@@ -227,7 +227,7 @@ line-height: 19px;
 		width: 50px;
 		height: 70px;
 	}
-	  .calculator-box, .calculator-bg {
+	  .calculator-box, .calculator-bg, body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1)  {
 		width: 300px;
 		height: 160px;
 	  }
@@ -350,9 +350,16 @@ border-radius: 5px;
 	  .calculator-mobile-bg  {
 		display: flex;
 	  }
-	  .calculator-box svg {
+	  body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1) {
 		display: none
 	  }
+	  body > div.layout-container > div > div.middle > div.calculator-box > div.price-display-box > div.change-price-box > div.mobile-arrows-right > button:nth-child(2) > img {
+		margin-left: -10px;
+	  }
+	  body > div.layout-container > div > div.middle > div.calculator-box > div.price-display-box > div.change-price-box > div.mobile-arrows-left > button:nth-child(1) > img {
+		margin-right: -14px;
+	  }
+	  
 .buy-button {
 	padding: 0px;
 	margin-bottom: -14px;
@@ -630,12 +637,7 @@ border-radius: 5px;
 		display: none;
 	  }
 
-	  body > div.layout-container > div > div.middle > div.calculator-box > div.price-display-box > div.change-price-box > div.mobile-arrows-right > button:nth-child(2) > img {
-		margin-left: -10px;
-	  }
-	  body > div.layout-container > div > div.middle > div.calculator-box > div.price-display-box > div.change-price-box > div.mobile-arrows-left > button:nth-child(1) > img {
-		margin-right: -14px;
-	  }
+	 
 	  .price-middle {
 		padding: 0px;
 		height: 40px;
