@@ -261,6 +261,10 @@ function calculateDiscount(minutes) {
     return PRICE_RANGES[PRICE_RANGES.length - 1].discount;
 }
 
+
+let lastActiveIndex = -1;
+let activatedIndices = [];
+
 function updateDisplay(minutes, smooth = false) {
     minutes = Math.max(1, Math.min(minutes, 100000));
     if (calculatorInput) {
@@ -287,46 +291,110 @@ function updateDisplay(minutes, smooth = false) {
         activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
     }
 
-    // Convert NodeList to Array and find the previous active index
     const priceCountersArray = Array.from(document.querySelectorAll('.price-counter'));
-    const newActiveIndex = PRICE_RANGES.findIndex(range => range.price === price);
+const priceCountersPercentArray = Array.from(document.querySelectorAll('.price-counter-percent'));
+const newActiveIndex = PRICE_RANGES.findIndex(range => range.price === price);
+
+if (newActiveIndex !== lastActiveIndex) {
+    const isMovingForward = newActiveIndex > lastActiveIndex;
     
-    if (newActiveIndex !== lastActiveIndex) {
-        const isMovingForward = newActiveIndex > lastActiveIndex;
-        
-        priceCountersArray.forEach((counter, index) => {
-            updatePriceCounter(counter, index, newActiveIndex, isMovingForward);
-        });
-
-        const priceCountersPercentArray = Array.from(document.querySelectorAll('.price-counter-percent'));
-        priceCountersPercentArray.forEach((counter, index) => {
-            updatePriceCounter(counter, index, newActiveIndex, isMovingForward);
-        });
-
-        lastActiveIndex = newActiveIndex;
-    }
-}
-
-let lastActiveIndex = -1; // Add this at the top of your script
-
-function updatePriceCounter(counter, index, newActiveIndex, isMovingForward) {
-    const isPriceMatch = index === newActiveIndex;
-
-    if (isPriceMatch) {
-        if (!counter.classList.contains('active') && isMovingForward) {
-            counter.classList.remove('settle-back');
-            counter.classList.add('active', 'punch-out');
-            setTimeout(() => {
-                counter.classList.remove('punch-out');
-                counter.classList.add('settle-back');
-            }, 300);
-        } 
+    if (isMovingForward) {
+        // Add all indices we're moving through to activatedIndices, except the first one
+        for (let i = Math.max(1, lastActiveIndex + 1); i <= newActiveIndex; i++) {
+            if (!activatedIndices.includes(i)) {
+                activatedIndices.push(i);
+            }
+        }
     } else {
-        counter.classList.remove('active', 'punch-out', 'settle-back');
+        // Remove indices we're moving back from, but never remove the first index
+        activatedIndices = activatedIndices.filter(index => index <= newActiveIndex || index === 0);
+    }
+
+    // Update all activated indices, starting from index 1
+    activatedIndices.filter(index => index > 0).forEach(index => {
+        updatePriceCounter(priceCountersArray[index], index, newActiveIndex, lastActiveIndex, isMovingForward, false);
+        updatePriceCounter(priceCountersPercentArray[index], index, newActiveIndex, lastActiveIndex, isMovingForward, true);
+    });
+
+    // Always update the first counter without changing its value
+    updatePriceCounter(priceCountersArray[0], 0, newActiveIndex, lastActiveIndex, isMovingForward, false, true);
+    updatePriceCounter(priceCountersPercentArray[0], 0, newActiveIndex, lastActiveIndex, isMovingForward, true, true);
+
+    // Reset any counters after the new active index
+    for (let i = Math.max(...activatedIndices, newActiveIndex) + 1; i < priceCountersArray.length; i++) {
+        priceCountersArray[i].classList.remove('active', 'punch-out', 'settle-back');
+        priceCountersPercentArray[i].classList.remove('active', 'punch-out', 'settle-back');
+        updatePriceDisplay(priceCountersArray[i], i, false);
+        updatePriceDisplay(priceCountersPercentArray[i], i, true);
+    }
+
+    lastActiveIndex = newActiveIndex;
+}
+}
+
+function updatePriceCounter(counter, index, newActiveIndex, oldActiveIndex, isMovingForward, isDiscountCounter, isFirstCounter = false) {
+    const isNewlyActive = index === newActiveIndex;
+    const wasActive = index === oldActiveIndex;
+
+    counter.classList.remove('active', 'punch-out');
+
+    if (isNewlyActive) {
+        counter.classList.add('active', 'punch-out');
+        setTimeout(() => {
+            counter.classList.remove('punch-out');
+            if (!isFirstCounter) {
+                counter.classList.add('settle-back');
+            }
+            updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
+        }, 300);
+    } else if (activatedIndices.includes(index) && !isFirstCounter) {
+        // This is a previously activated value, update it
+        counter.classList.add('settle-back');
+        updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
+    } else {
+        counter.classList.remove('settle-back');
+        updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
     }
 }
 
-// Update the moveMicrophone function to use updateDisplay
+function updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter = false) {
+    if (PRICE_RANGES[index] === undefined) {
+        console.warn(`No price range found for index ${index}`);
+        return;
+    }
+
+    // Check if there's only one activated index
+    const shouldClearFirstElement = activatedIndices.length >= 1 ;
+    console.log(activatedIndices.length);
+    if (isDiscountCounter) {
+        const baseDiscount = PRICE_RANGES[index].discount;
+        let displayDiscount = baseDiscount;
+
+        if (counter.classList.contains('settle-back') && !isFirstCounter) {
+            displayDiscount = Math.max(0, baseDiscount - 20); // Decrease discount by 20%, but not below 0
+        }
+
+        if (shouldClearFirstElement && index === 0) {
+            counter.textContent = '';
+        } else {
+            counter.textContent = displayDiscount ? `-${displayDiscount}%` : '';
+        }
+    } else {
+        const basePrice = PRICE_RANGES[index].price;
+        let displayPrice = basePrice;
+
+        if (counter.classList.contains('settle-back') && !isFirstCounter) {
+            displayPrice = basePrice + 1;
+        }
+
+        if (shouldClearFirstElement && index === 0) {
+            counter.textContent = '';
+        } else {
+            counter.textContent = displayPrice + '₽';
+        }
+    }
+}
+    
 function moveMicrophone(e, smooth = false) {
     if (!slider) return;
     const rect = slider.getBoundingClientRect();
@@ -444,7 +512,46 @@ if (calculatorInput) {
 }
 // Initialize
 updateSliderDimensions();
-updateDisplay(1200); // Initial value
+function animateDisplay() {
+    const phases = [
+      { start: 50000, end: 10000, duration: 800 },
+      { start: 10000, end: 1000, duration: 1000 },
+      { start: 1000, end: 400, duration: 1000 },
+      { start: 400, end: 4000, duration: 1000 }  // New phase
+    ];
+    
+    const totalDuration = phases.reduce((sum, phase) => sum + phase.duration, 0);
+    let startTime;
+  
+    function update(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsedTime = timestamp - startTime;
+      
+      if (elapsedTime >= totalDuration) {
+        updateDisplay(phases[phases.length - 1].end);
+        return;
+      }
+  
+      let currentTime = 0;
+      for (let i = 0; i < phases.length; i++) {
+        const phase = phases[i];
+        if (elapsedTime < currentTime + phase.duration) {
+          const phaseProgress = (elapsedTime - currentTime) / phase.duration;
+          const currentValue = Math.round(phase.start + (phase.end - phase.start) * phaseProgress);
+          updateDisplay(currentValue);
+          break;
+        }
+        currentTime += phase.duration;
+      }
+  
+      requestAnimationFrame(update);
+    }
+  
+    requestAnimationFrame(update);
+  }
+  
+  // Usage
+  animateDisplay();
 
 // Add event listener for window resize
 window.addEventListener('resize', () => {
