@@ -149,33 +149,38 @@ filter: drop-shadow(0px 4px 8px #000000);
 }
 
 .menu-item {
-    font-family: "Mulish", sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    color: #FFFFFF;
-    text-decoration: none;
-    white-space: nowrap;
+font-family: 'Mulish';
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+line-height: 23px;
+
+color: #191919;
 }
 
-.menu-item-active {
-display: flex;
-font-family: 'ST-SimpleSquare';
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-align-items: center;
-
-background: linear-gradient(105.82deg, #08466B -43.96%, #37779D -5.6%, #71BDEB 43.21%, #37779D 109.46%);
+.menu-item:hover {
+    transition: 1s;
+    background: linear-gradient(20.82deg, #08466B -43.96%, #37779D -5.6%, #71BDEB 43.21%, #37779D 109.46%, #08466B 157.91%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 text-fill-color: transparent;
-filter: drop-shadow(0px 0px 8.2px #000000);
+filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.9)) contrast(1.45);
 }
 
-.menu-item-active h2 {
-    margin-top: -6px;
+.menu-item-active {
+    transition: 1s;
+font-family: 'Mulish';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 23px;
+background: linear-gradient(20.82deg, #08466B -43.96%, #37779D -5.6%, #71BDEB 43.21%, #37779D 109.46%, #08466B 157.91%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.9)) contrast(1.45);
 }
 
 .currency-lang-nav {
@@ -196,37 +201,58 @@ color: #FFFFFF;
 
 box-sizing: border-box;
 background: rgba(29, 29, 29, 0.36);
-border: 2px solid #999898;
+border: 1px solid #999898;
 box-shadow: 0px 0px 49.8876px #000000;
 border-radius:  8px;
+transition: opacity 0.3s ease-in-out;
+opacity: 0;
+pointer-events: none;
 }
-
-.currency-change-window div:first-child {
-    border: none;
-  }  
-
-.dollar, .euro, .ruble {
+  .currency-change-window:not(.hide) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .dollar, .euro, .ruble {
     display: flex;
     align-items: center;
-text-align: center;
-position: relative;
-width: 89px;
-height: 30px;
-background: rgba(0, 0, 0, 0.1);
-border-top: 1px solid #999898;
-}
-
-.dollar svg, .euro svg {
+    text-align: center;
+    position: relative;
+    width: 89px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .dollar svg, .euro svg {
     margin-right: 4px;
     margin-left: 5px;
-}
-
-.ruble svg {
+  }
+  
+  .ruble svg {
     max-height: 14px;
-    max-weight: 14px;
+    max-width: 14px;
     margin-right: 2px;
-    margin-left: 2px;
-}
+    margin-left: 6px;
+  }
+  
+  .currency-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  }
+  
+  .currency-change-window.animate .currency-text span {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .currency-change-window.animate .currency-text span:nth-child(1) { transition-delay: 0.1s; }
+  .currency-change-window.animate .currency-text span:nth-child(2) { transition-delay: 0.2s; }
+  .currency-change-window.animate .currency-text span:nth-child(3) { transition-delay: 0.3s; }
+  .currency-change-window.animate .currency-text span:nth-child(4) { transition-delay: 0.4s; }
+  .currency-change-window.animate .currency-text span:nth-child(5) { transition-delay: 0.5s; }
+  .currency-change-window.animate .currency-text span:nth-child(6) { transition-delay: 0.6s; }
 
 .hide {
     display: none;
@@ -248,11 +274,12 @@ border-top: 1px solid #999898;
 }
 
 .main-block {
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 830px;
+    height: 770px;
     background: linear-gradient(270deg, rgba(123, 123, 123, 0.2) 0%, rgba(174, 174, 174, 0.2) 50%, rgba(123, 123, 123, 0.2) 100%);
     box-shadow: -11px 0px 40px #000000, 11px 0px 40px #000000;
     border-radius: 10px;
@@ -260,7 +287,7 @@ border-top: 1px solid #999898;
 }
 
 .middle {
-    margin-top: -60px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -284,15 +311,12 @@ text-shadow: 1px 1px 2px rgba(241, 241, 241, 0.46), -11px 10px 15px rgba(0, 0, 0
 .payment-navigation {
     display: flex;
     justify-content: space-between;
-    width: 680px;
+    width: 640px;
     height: 50px;
     margin-top: 42px;
-font-family: "Mulish";
-font-weight: 500;
-font-size: 20px;
-gap: 30px;
-color: #FFFFFF;
-white-space: nowrap;
+    font-family: "Mulish", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .payment-navigation-btn,
@@ -326,6 +350,12 @@ white-space: nowrap;
 .letter {
     display: inline-block;
     transition: transform 0.3s ease;
+    background: linear-gradient(248.64deg, rgba(105, 105, 105, 0.8) 6.23%, rgba(255, 255, 255, 0.8) 50%, rgba(105, 105, 105, 0.8) 93.77%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    filter: contrast(1.25);
 }
 .payment-navigation-btn:hover .letter {
     transform: translateY(-100%);
@@ -344,15 +374,14 @@ white-space: nowrap;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 text-fill-color: transparent;
-filter: drop-shadow(0px 0px 8.2px #000000);
+filter: drop-shadow(0px 0px 8.2px #000000) contrast(1.25);
 font-weight: 800;
 font-size: 22px;
-line-height: 120%;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 text-fill-color: transparent;
-
+margin-top: -8px;
 }
 
 .typing-block {
@@ -363,7 +392,7 @@ font-family: 'ST-SimpleSquare';
 font-weight: 400;
 font-size: 16px;
 color: #FFFFFF;
-margin-top: 40px;
+margin-top: 92px;
 }
 
 .typing-block-1 {
@@ -392,7 +421,7 @@ position: relative;
   }
 
 .price-slider-block {
-    margin-top: 62px;
+    margin-top: 42px;
     display: flex;
     flex-direction: column;
 }
@@ -403,7 +432,6 @@ position: relative;
     align-items: center;
     font-family: 'Gilroy';
     font-size: 20px;
-    padding-left: 10px;
 }
 
 .price-bottom {
@@ -411,7 +439,7 @@ position: relative;
 }
 
 .price-bottom p {
-    width: 80px;
+    width: 50px;
 }
 
 .price-top p {
@@ -419,20 +447,28 @@ position: relative;
 }
 
 .price-top > p:nth-child(4) {
-    margin-right: -30px
+    margin-right: -40px
 }
 
 .price-top > p:nth-child(3) {
-    margin-right:20px
+    margin-right: 0px
 }
+
+.price-top > p:nth-child(2) {
+    margin-right: -4px
+}
+
 
 .price-bottom > p:nth-child(2) {
-    margin-left:-60px
+    margin-left: -48px
+}
+.price-bottom > p:nth-child(3) {
+    margin-left: -1px
+}
+.price-bottom > p:nth-child(4) {
+    margin-right: -40px
 }
 
-.price-bottom > p:nth-child(4) {
-    margin-right: -60px
-}
 
 .price-top {
     width: 100%;
@@ -442,7 +478,7 @@ position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 14px;
     width: 100%;
 }
 
@@ -485,13 +521,13 @@ background: linear-gradient(120.84deg, #08466B 7.12%, #37779D 19.42%, #71BDEB 35
 -webkit-text-fill-color: transparent;
 background-clip: text;
 text-fill-color: transparent;
-filter: drop-shadow(-2px 4px 4px rgba(0, 0, 0, 1));
+filter: drop-shadow(-2px 4px 4px rgba(0, 0, 0, 1)) contrast(1.55);
 }
 
 
 
 .price-middle {
-    padding-top: 4px;
+   margin-top: -10px
 }
 
 .slider {
@@ -576,7 +612,7 @@ min-height: 88px;
 .calculator-box {
 z-index: 2;
 backdrop-filter: blur(1.2px);
-    margin-top: 40px;
+    margin-top: 80px;
     height: 175px;
     width: 360px;
 }
@@ -620,8 +656,8 @@ backdrop-filter: blur(1.2px);
 
 .full-arrows-right, .full-arrows-left {
     position: absolute;
-    width: 140px;
-    height: 70px;
+    width: 100px;
+    height: 50px;
     opacity: 0;
   }
 
@@ -640,7 +676,7 @@ backdrop-filter: blur(1.2px);
   }
   
   .full-arrows-right {
-    margin-left: 335px;
+    margin-left: 365px;
   }
   
   .full-arrows-left {
@@ -649,7 +685,7 @@ backdrop-filter: blur(1.2px);
   
   .change-price-left, .change-price-right {
     width: 70px;
-    height: 70px;
+    height: 50px;
     display: grid;
     overflow: hidden;
     position: relative;
@@ -670,19 +706,21 @@ backdrop-filter: blur(1.2px);
     max-width: none;
     object-fit: cover;
     object-position: center;
+    padding-top: 18px;
   }
 
   .change-price-right > .image-container img {
     transform: translateX(40%);
     margin-left: -4px;
+
   }
 
   .double-right > .image-container img {
-    transform: translateX(10%);
+    transform: translateX(6%);
   }
 
   .triple-right > .image-container img {
-    transform: translateX(-30%);
+    transform: translateX(-32%);
   }
 
   .change-price-left > .image-container img {
@@ -690,26 +728,20 @@ backdrop-filter: blur(1.2px);
   }
 
   .double-left > .image-container img {
-    transform: translateX(-10%);
+    transform: translateX(-6%);
   }
 
   .triple-left > .image-container img {
     transform: translateX(30%);
   }
   
-  .double-right .image-container {
-    margin-left: -2px;
-  }
 
   .double-left .image-container  {
-    margin-left: -6px;
+    margin-left: -16px;
   }
 
-  .triple-right .image-container {
-    margin-left: -12px;
-  }
   .triple-left .image-container {
-    margin-left: 6px;
+    margin-left: -16px;
   }
   .double-right, .triple-right, .double-left, .triple-left {
     opacity: 0;
@@ -728,9 +760,14 @@ backdrop-filter: blur(1.2px);
   .full-arrows-left.show .triple-left { transition-delay: 0.2s; }
   .full-arrows-left.show .double-left { transition-delay: 0.1s; }
 
-  .double-right, .triple-right, .double-left, .triple-left {
+  .double-right, .double-left {
+    width: 50px;
+    height: 50px;
+  }
+
+  .triple-right, .triple-left {
     width: 70px;
-    height: 70px;
+    height: 50px;
   }
 
 .calculator-value {
@@ -743,7 +780,7 @@ backdrop-filter: blur(1.2px);
 font-family: 'Gilroy';
 background-clip: text;
 text-fill-color: transparent;
-filter: drop-shadow(-2px 4px 8.2px #000000), drop-shadow(-11px 0px 40px 0px rgba(0, 0, 0, 1));
+filter: drop-shadow(-2px 4px 8.2px #000000), drop-shadow(-11px 0px 40px 0px rgba(0, 0, 0, 1)) contrast(1.75);
 background: linear-gradient(102.39deg, #727272 2.18%, #B1B1B1 20.2%, #E8E8E8 49.6%, #A4A4A4 74.26%, #424242 97.02%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
@@ -796,47 +833,51 @@ margin-top: 70px;
 
 .currency-display img {
     min-width: 64px;
+    max-height: 76px;
 }
 
+/* Updated styles for the buy button */
 .buy-button {
     position: absolute;
-    width: 384px;
+    width: 300px;
     height: 54px;
     background: none;
     border: none;
     padding: 0;
     bottom: -18px;
     cursor: pointer;
-  }
-  
-  .buy-button img {
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.buy-button img {
     position: absolute;
-    top: 0;
+    top: -6px;
     left: 0;
     width: 130%;
-    height: 130%;
+    height:130%;
     object-fit: contain;
-    transition: opacity 0.01s ease;
-  }
-  
-  /* Show the default image and hide the hover image */
-  .buy-button img:first-child {
-    opacity: 1;
-  }
-  
-  .buy-button img:last-child {
-    opacity: 0;
-  }
-  
-  /* On hover, hide the default image and show the hover image */
-  .buy-button:hover img:first-child {
-    opacity: 0;
-  }
-  
-  .buy-button:hover img:last-child {
-    opacity: 1;
-  }
+    transition: opacity 0.3s ease;
+}
 
+.buy-button::after {
+    content: "";
+    position: absolute;
+    width: 278px;
+    height: 0;
+    bottom: 0;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: height 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+border-radius: 5px;
+}
+
+.buy-button:hover::after {
+    height: 86%;
+}
 .registration {
     padding-right: 50px;
     padding-top: 8px;
@@ -1033,52 +1074,6 @@ text-fill-color: transparent;
 filter: drop-shadow(-2px 4px 4px rgba(0, 0, 0, 1));
 }
 
-
-.punch-out {
-    animation: punchOut 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
-    transform-origin: center;
-}
-
-@keyframes punchOut {
-    0% { 
-        transform: translateX(0) rotate(0deg) scale(1); 
-        opacity: 1;
-        filter: blur(0);
-    }
-    20% { 
-        transform: translateX(-10px) rotate(-5deg) scale(1.1);
-    }
-    40% { 
-        transform: translateX(40px) rotate(15deg) scale(0.9);
-    }
-    70% { 
-        transform: translateX(100px) rotate(25deg) scale(0.8); 
-        opacity: 0.5;
-        filter: blur(2px);
-    }
-    100% { 
-        transform: translateX(150px) rotate(40deg) scale(0.6); 
-        opacity: 0;
-        filter: blur(5px);
-    }
-}
-
-@keyframes settleBack {
-    0% { transform: translateX(50px) rotate(10deg); opacity: 0; }
-    50% { transform: translateX(-5px) rotate(-2deg); opacity: 0.7; }
-    75% { transform: translateX(5px) rotate(1deg); opacity: 0.9; }
-    100% { transform: translateX(0) rotate(0deg); opacity: 1; }
-}
-
-
-
-.settle-back {
-    animation: settleBack 0.4s ease-out forwards;
-}
-
-.active {
-    opacity: 0;
-}
 
 body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1) {
     max-width: 360px;

@@ -7,46 +7,72 @@ const dollarOption = document.querySelector('.dollar');
 const euroOption = document.querySelector('.euro');
 const rubleOption = document.querySelector('.ruble');
 
+function selectCurrency(currency) {
+    updateCurrencyDisplay(currency);
+    updateCurrencyOptions(currency);
+    toggleCurrencyWindow(); // Close the window after selection
+  }
+
 // Get all currency display images
 const rubleDisplay = document.querySelector('.currency-display img[alt="рубль"]');
 const euroDisplay = document.querySelector('.currency-display img[alt="евро"]');
 const dollarDisplay = document.querySelector('.currency-display img[alt="доллар"]');
 
+dollarOption.addEventListener('click', () => selectCurrency('dollar'));
+euroOption.addEventListener('click', () => selectCurrency('euro'));
+rubleOption.addEventListener('click', () => selectCurrency('ruble'));
+
 // Function to toggle the currency change window
 function toggleCurrencyWindow() {
-    currencyChangeWindow.classList.toggle('hide');
+  currencyChangeWindow.classList.toggle('hide');
+  if (!currencyChangeWindow.classList.contains('hide')) {
+    // Add animate class after a small delay to ensure the window is visible
+    setTimeout(() => {
+      currencyChangeWindow.classList.add('animate');
+    }, 50);
+  } else {
+    currencyChangeWindow.classList.remove('animate');
+  }
 }
 
 // Function to update the currency display
 function updateCurrencyDisplay(selectedCurrency) {
-    rubleDisplay.classList.add('hide');
-    euroDisplay.classList.add('hide');
-    dollarDisplay.classList.add('hide');
+  rubleDisplay.classList.add('hide');
+  euroDisplay.classList.add('hide');
+  dollarDisplay.classList.add('hide');
 
-    if (selectedCurrency === 'ruble') {
-        rubleDisplay.classList.remove('hide');
-    } else if (selectedCurrency === 'euro') {
-        euroDisplay.classList.remove('hide');
-    } else if (selectedCurrency === 'dollar') {
-        dollarDisplay.classList.remove('hide');
-    }
+  if (selectedCurrency === 'ruble') {
+    rubleDisplay.classList.remove('hide');
+  } else if (selectedCurrency === 'euro') {
+    euroDisplay.classList.remove('hide');
+  } else if (selectedCurrency === 'dollar') {
+    dollarDisplay.classList.remove('hide');
+  }
 }
 
 // Function to update the currency options
 function updateCurrencyOptions(selectedCurrency) {
-    rubleOption.classList.add('hide');
-    euroOption.classList.add('hide');
-    dollarOption.classList.add('hide');
+  rubleOption.classList.add('hide');
+  euroOption.classList.add('hide');
+  dollarOption.classList.add('hide');
 
-    if (selectedCurrency !== 'ruble') {
-        rubleOption.classList.remove('hide');
-    }
-    if (selectedCurrency !== 'euro') {
-        euroOption.classList.remove('hide');
-    }
-    if (selectedCurrency !== 'dollar') {
-        dollarOption.classList.remove('hide');
-    }
+  if (selectedCurrency !== 'ruble') {
+    rubleOption.classList.remove('hide');
+  }
+  if (selectedCurrency !== 'euro') {
+    euroOption.classList.remove('hide');
+  }
+  if (selectedCurrency !== 'dollar') {
+    dollarOption.classList.remove('hide');
+  }
+
+  document.querySelectorAll('.currency-change-window > div:not(.hide) .currency-text').forEach(text => {
+    text.style.transition = 'none';
+    text.style.transform = 'translateY(100%)';
+    text.offsetHeight; // Trigger reflow
+    text.style.transition = 'transform 0.3s ease-out';
+    text.style.transform = 'translateY(0)';
+  });
 }
 
 // Add click event listener to the currency element
@@ -54,28 +80,29 @@ currencyElement.addEventListener('click', toggleCurrencyWindow);
 
 // Add click event listeners to currency options
 dollarOption.addEventListener('click', () => {
-    updateCurrencyDisplay('dollar');
-    updateCurrencyOptions('dollar');
-    toggleCurrencyWindow();
+  updateCurrencyDisplay('dollar');
+  updateCurrencyOptions('dollar');
+  toggleCurrencyWindow();
 });
 
 euroOption.addEventListener('click', () => {
-    updateCurrencyDisplay('euro');
-    updateCurrencyOptions('euro');
-    toggleCurrencyWindow();
+  updateCurrencyDisplay('euro');
+  updateCurrencyOptions('euro');
+  toggleCurrencyWindow();
 });
 
 rubleOption.addEventListener('click', () => {
-    updateCurrencyDisplay('ruble');
-    updateCurrencyOptions('ruble');
-    toggleCurrencyWindow();
+  updateCurrencyDisplay('ruble');
+  updateCurrencyOptions('ruble');
+  toggleCurrencyWindow();
 });
 
 // Close the currency window when clicking outside of it
 document.addEventListener('click', (event) => {
-    if (!currencyElement.contains(event.target) && !currencyChangeWindow.contains(event.target)) {
-        currencyChangeWindow.classList.add('hide');
-    }
+  if (!currencyElement.contains(event.target) && !currencyChangeWindow.contains(event.target)) {
+    currencyChangeWindow.classList.add('hide');
+    currencyChangeWindow.classList.remove('animate');
+  }
 });
 
 
@@ -193,7 +220,7 @@ const PRICE_RANGES = [
 function updateSliderDimensions() {
     const windowWidth = window.innerWidth;
     if (windowWidth >= 1160) {
-        SLIDER_WIDTH = 1120;
+        SLIDER_WIDTH = 1160;
         isRotated = false;
     } else if (windowWidth >= 1000) {
         SLIDER_WIDTH = 850;
@@ -266,7 +293,7 @@ let lastActiveIndex = -1;
 let activatedIndices = [];
 
 function updateDisplay(minutes, smooth = false) {
-    minutes = Math.max(1, Math.min(minutes, 100000));
+    minutes = Math.max(0, Math.min(minutes, 100000));
     if (calculatorInput) {
         calculatorInput.value = minutes;
         resizeInput.call(calculatorInput);
@@ -514,10 +541,9 @@ if (calculatorInput) {
 updateSliderDimensions();
 function animateDisplay() {
     const phases = [
-      { start: 50000, end: 10000, duration: 800 },
+      { start: 30000, end: 10000, duration: 400 },
       { start: 10000, end: 1000, duration: 1000 },
-      { start: 1000, end: 400, duration: 1000 },
-      { start: 400, end: 4000, duration: 1000 }  // New phase
+      { start: 1000, end: 0, duration: 1000 }
     ];
     
     const totalDuration = phases.reduce((sum, phase) => sum + phase.duration, 0);
