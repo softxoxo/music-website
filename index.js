@@ -317,109 +317,6 @@ function updateDisplay(minutes, smooth = false) {
     if (activePriceCounterPercent) {
         activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
     }
-
-    const priceCountersArray = Array.from(document.querySelectorAll('.price-counter'));
-const priceCountersPercentArray = Array.from(document.querySelectorAll('.price-counter-percent'));
-const newActiveIndex = PRICE_RANGES.findIndex(range => range.price === price);
-
-if (newActiveIndex !== lastActiveIndex) {
-    const isMovingForward = newActiveIndex > lastActiveIndex;
-    
-    if (isMovingForward) {
-        // Add all indices we're moving through to activatedIndices, except the first one
-        for (let i = Math.max(1, lastActiveIndex + 1); i <= newActiveIndex; i++) {
-            if (!activatedIndices.includes(i)) {
-                activatedIndices.push(i);
-            }
-        }
-    } else {
-        // Remove indices we're moving back from, but never remove the first index
-        activatedIndices = activatedIndices.filter(index => index <= newActiveIndex || index === 0);
-    }
-
-    // Update all activated indices, starting from index 1
-    activatedIndices.filter(index => index > 0).forEach(index => {
-        updatePriceCounter(priceCountersArray[index], index, newActiveIndex, lastActiveIndex, isMovingForward, false);
-        updatePriceCounter(priceCountersPercentArray[index], index, newActiveIndex, lastActiveIndex, isMovingForward, true);
-    });
-
-    // Always update the first counter without changing its value
-    updatePriceCounter(priceCountersArray[0], 0, newActiveIndex, lastActiveIndex, isMovingForward, false, true);
-    updatePriceCounter(priceCountersPercentArray[0], 0, newActiveIndex, lastActiveIndex, isMovingForward, true, true);
-
-    // Reset any counters after the new active index
-    for (let i = Math.max(...activatedIndices, newActiveIndex) + 1; i < priceCountersArray.length; i++) {
-        priceCountersArray[i].classList.remove('active', 'punch-out', 'settle-back');
-        priceCountersPercentArray[i].classList.remove('active', 'punch-out', 'settle-back');
-        updatePriceDisplay(priceCountersArray[i], i, false);
-        updatePriceDisplay(priceCountersPercentArray[i], i, true);
-    }
-
-    lastActiveIndex = newActiveIndex;
-}
-}
-
-function updatePriceCounter(counter, index, newActiveIndex, oldActiveIndex, isMovingForward, isDiscountCounter, isFirstCounter = false) {
-    const isNewlyActive = index === newActiveIndex;
-    const wasActive = index === oldActiveIndex;
-
-    counter.classList.remove('active', 'punch-out');
-
-    if (isNewlyActive) {
-        counter.classList.add('active', 'punch-out');
-        setTimeout(() => {
-            counter.classList.remove('punch-out');
-            if (!isFirstCounter) {
-                counter.classList.add('settle-back');
-            }
-            updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
-        }, 300);
-    } else if (activatedIndices.includes(index) && !isFirstCounter) {
-        // This is a previously activated value, update it
-        counter.classList.add('settle-back');
-        updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
-    } else {
-        counter.classList.remove('settle-back');
-        updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter);
-    }
-}
-
-function updatePriceDisplay(counter, index, isDiscountCounter, isFirstCounter = false) {
-    if (PRICE_RANGES[index] === undefined) {
-        console.warn(`No price range found for index ${index}`);
-        return;
-    }
-
-    // Check if there's only one activated index
-    const shouldClearFirstElement = activatedIndices.length >= 1 ;
-    console.log(activatedIndices.length);
-    if (isDiscountCounter) {
-        const baseDiscount = PRICE_RANGES[index].discount;
-        let displayDiscount = baseDiscount;
-
-        if (counter.classList.contains('settle-back') && !isFirstCounter) {
-            displayDiscount = Math.max(0, baseDiscount - 20); // Decrease discount by 20%, but not below 0
-        }
-
-        if (shouldClearFirstElement && index === 0) {
-            counter.textContent = '';
-        } else {
-            counter.textContent = displayDiscount ? `-${displayDiscount}%` : '';
-        }
-    } else {
-        const basePrice = PRICE_RANGES[index].price;
-        let displayPrice = basePrice;
-
-        if (counter.classList.contains('settle-back') && !isFirstCounter) {
-            displayPrice = basePrice + 1;
-        }
-
-        if (shouldClearFirstElement && index === 0) {
-            counter.textContent = '';
-        } else {
-            counter.textContent = displayPrice + '₽';
-        }
-    }
 }
     
 function moveMicrophone(e, smooth = false) {
@@ -679,11 +576,15 @@ const phrases = [
 
   // ------------------------------------- RESIZE INPUT------------------------------------------------//
 
-  calculatorInput.addEventListener('input', resizeInput); 
+calculatorInput.addEventListener('input', resizeInput); 
 resizeInput.call(calculatorInput); 
 
 function resizeInput() {
-  this.style.width = this.value.length + "ch";
+  if (this.value.length === 1 ) {
+    this.style.width = 1.5 + "ch";
+  } else {
+    this.style.width = this.value.length + "ch";
+  }
 }
 
 //------------------------------------------LADDER NAV ------------------------------------------------//

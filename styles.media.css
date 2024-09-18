@@ -12,7 +12,7 @@
 	width: 100%;
   }
   .main-block {
-    margin-top: -90px;
+    margin-top: -50px;
     width: 1000px;
     background: rgba(25, 25, 25, 1);
     box-shadow: -11px 0px 40px #000000, 11px 0px 40px #000000;
@@ -63,9 +63,10 @@ font-size: 13px;
   }
   .typing-block-1 {
 	width: 200px;
+	padding-top: 4px;
   }
   .typing-block-2 {
-	width: 200px;
+	width: 400px;
   }
   .price-top {
 	width: 100%;
@@ -130,7 +131,7 @@ line-height: 19px;
 
 @media (max-width: 700px) {
 	.main-block {
-		margin-top: -110px;
+		margin-top: -70px;
 		width: 700px;
 	}
 	.responsive-header {
@@ -224,8 +225,8 @@ line-height: 19px;
 		font-size: 16px;
 	}
 	.microphone img {
-		min-width: 160%;
-		margin-top: -16px;
+		min-width: 100%;
+		margin-top: 6px;
 	}
 	  .calculator-box, .calculator-bg, body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1)  {
 		width: 300px;
