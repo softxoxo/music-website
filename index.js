@@ -125,22 +125,50 @@ const tripleLeftButton = fullArrowsLeft.querySelector('.triple-left');
 const doubleLeftButton = fullArrowsLeft.querySelector('.double-left');
 
 function showFullArrows(arrowElement) {
-    arrowElement.classList.remove('hide');
-    setTimeout(() => {
+  arrowElement.classList.remove('hide');
+  arrowElement.style.display = 'block';
+  setTimeout(() => {
       arrowElement.classList.add('show');
-    }, 10); // Small delay to ensure the transition works
-  }
-  
-  function hideFullArrows(arrowElement) {
-    arrowElement.classList.remove('show');
-    arrowElement.addEventListener('transitionend', function onTransitionEnd() {
-      if (!arrowElement.classList.contains('show')) {
-        arrowElement.classList.add('hide');
-      }
-      arrowElement.removeEventListener('transitionend', onTransitionEnd);
-    });
-  }
+  }, 10);
+}
 
+function hideFullArrows(arrowElement) {
+  const buttons = arrowElement.querySelectorAll('button');
+  let maxDelay = 0;
+
+  buttons.forEach(button => {
+      let delay;
+      if (button.classList.contains('double-left') || button.classList.contains('double-right')) {
+          delay = 100;
+      } else if (button.classList.contains('triple-left') || button.classList.contains('triple-right')) {
+          delay = 200;
+      } else {
+          delay = 0;
+      }
+
+      maxDelay = Math.max(maxDelay, delay);
+
+      setTimeout(() => {
+          button.style.opacity = '0';
+          button.style.visibility = 'hidden';
+      }, delay);
+  });
+
+  // Start fading out the container after the last button has started fading
+  setTimeout(() => {
+      arrowElement.classList.remove('show');
+      arrowElement.addEventListener('transitionend', function onTransitionEnd(e) {
+          if (e.propertyName === 'opacity') {
+              buttons.forEach(btn => {
+                  btn.style.opacity = '';
+                  btn.style.visibility = '';
+              });
+              arrowElement.removeEventListener('transitionend', onTransitionEnd);
+          }
+      });
+  }, maxDelay + 200); // Add 300ms to ensure buttons have started fading
+}
+  
 // Add event listeners for left arrow
 changePriceLeft.addEventListener('mouseenter', () => showFullArrows(fullArrowsLeft));
 changePriceLeft.addEventListener('mouseleave', (event) => {
@@ -204,23 +232,23 @@ styleSheet.type = "text/css";
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
-let SLIDER_WIDTH = 1160; // Default width, will be updated based on window size
+let SLIDER_WIDTH = 1120; // Default width, will be updated based on window size
 let SLIDER_HEIGHT = 0; // Will be used for the rotated slider
 let isRotated = false; // Flag to check if the slider is rotated
 
 const PRICE_RANGES = [
-    { max: 1000, price: 5, widthPercentage: 22.4, discount: 0 },
-    { max: 10000, price: 4, widthPercentage: 26.7, discount: 20 },
-    { max: 50000, price: 3, widthPercentage: 26.7, discount: 40 },
-    { max: 100000, price: 2, widthPercentage: 23.9, discount: 60 }
+    { max: 1000, price: 5, widthPercentage: 23.8, discount: 0 },
+    { max: 10000, price: 4, widthPercentage: 25.6, discount: 20 },
+    { max: 50000, price: 3, widthPercentage: 25.8, discount: 40 },
+    { max: 100000, price: 2, widthPercentage: 24.8, discount: 60 }
 ];
 
 
 
 function updateSliderDimensions() {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 1160) {
-        SLIDER_WIDTH = 1160;
+    if (windowWidth >= 1120) {
+        SLIDER_WIDTH = 1120;
         isRotated = false;
     } else if (windowWidth >= 1000) {
         SLIDER_WIDTH = 850;
