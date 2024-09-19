@@ -277,7 +277,7 @@ pointer-events: none;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
-    line-height: 120%;
+    line-height: 80%;
     text-align: center;
     cursor: pointer;
     background: linear-gradient(93.44deg, #AB1443 -6.46%, #A21440 27.99%, #EE2A67 38.14%, #A21440 58.84%, #900F37 98.36%);
@@ -641,6 +641,7 @@ min-height: 64px;
     position: absolute;
     cursor: pointer;
     z-index: 2;
+    margin-left: -1px;
 }
 
 
@@ -658,16 +659,6 @@ min-height: 64px;
     margin-left: -10px;
 }
 
-.microphone-glow::after {
-    box-shadow: 0 0 30px 20px rgba(0, 0, 0, 1);
-    content: " ";
-    height: 0px;
-    position: absolute;
-    top: 0;
-    width: 20px;
-  }
-
-  
 .calculator-box {
 z-index: 2;
 backdrop-filter: blur(1.2px);
@@ -999,7 +990,7 @@ color: black;
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
-    line-height: 120%;
+    line-height: 80%;
     text-decoration-line: underline;
     color: #900F37;
 }
@@ -1014,7 +1005,7 @@ text-decoration-line: underline;
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
-    line-height: 120%;
+    line-height: 80%;
     text-decoration-line: underline;
 }
 
@@ -1057,12 +1048,12 @@ text-decoration-line: underline;
 }
 
 .modal-present {
-    padding-top: 4px;
+    margin-top: 4px;
 font-family: 'ST-SimpleSquare';
 font-style: normal;
 font-weight: 400;
 font-size: 26px;
-line-height: 120%;
+line-height: 80%;
 -trim: both;
 text-edge: cap;
 display: flex;

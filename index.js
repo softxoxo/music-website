@@ -232,7 +232,7 @@ styleSheet.type = "text/css";
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
-let SLIDER_WIDTH = 1120; // Default width, will be updated based on window size
+let SLIDER_WIDTH = 1122; // Default width, will be updated based on window size
 let SLIDER_HEIGHT = 0; // Will be used for the rotated slider
 let isRotated = false; // Flag to check if the slider is rotated
 
@@ -247,8 +247,8 @@ const PRICE_RANGES = [
 
 function updateSliderDimensions() {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 1120) {
-        SLIDER_WIDTH = 1120;
+    if (windowWidth >= 1122) {
+        SLIDER_WIDTH = 1122;
         isRotated = false;
     } else if (windowWidth >= 1000) {
         SLIDER_WIDTH = 850;
