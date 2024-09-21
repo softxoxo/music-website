@@ -588,9 +588,8 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(scrollTimeout);
 
         const deltaY = e.deltaY;
-        const currentPosition = parseFloat(microphone.style.left) || 0;
-        const newPosition = currentPosition + deltaY * 0.1;
-console.log(SLIDER_WIDTH)
+        const currentPosition = -(parseFloat(microphone.style.left)) || 0;
+        const newPosition = -(currentPosition + deltaY * 0.1);
         // Ensure the new position is within bounds
         const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
 
@@ -603,6 +602,7 @@ console.log(SLIDER_WIDTH)
             microphone.classList.add('smooth-transition');
         }, 150);
     });
+
     slider.addEventListener('wheel', (e) => {
       e.preventDefault();
 
@@ -614,8 +614,8 @@ console.log(SLIDER_WIDTH)
       clearTimeout(scrollTimeout);
 
       const deltaY = e.deltaY;
-      const currentPosition = parseFloat(microphone.style.left) || 0;
-      const newPosition = currentPosition + deltaY * 0.1;
+      const currentPosition = -(parseFloat(microphone.style.left)) || 0;
+      const newPosition = -(currentPosition + deltaY * 0.1);
 
       // Ensure the new position is within bounds
       const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
@@ -629,6 +629,33 @@ console.log(SLIDER_WIDTH)
           microphone.classList.add('smooth-transition');
       }, 150);
   });
+  
+  calculatorInput.addEventListener('wheel', (e) => {
+    e.preventDefault();
+
+    if (!isScrolling) {
+        microphone.classList.remove('smooth-transition');
+    }
+
+    isScrolling = true;
+    clearTimeout(scrollTimeout);
+
+    const deltaY = e.deltaY;
+    const currentPosition = -(parseFloat(microphone.style.left)) || 0;
+    const newPosition = -(currentPosition + deltaY * 0.1);
+
+    // Ensure the new position is within bounds
+    const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
+
+    updatePositions(boundedPosition, false);
+    const minutes = calculateMinutes(boundedPosition);
+    updateDisplay(minutes, false);
+
+    scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        microphone.classList.add('smooth-transition');
+    }, 150);
+});
 }
 
 // Call this function after your existing initialization code
