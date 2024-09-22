@@ -15,7 +15,7 @@
       <div class="main-block">
         <header class="header">
           <div class="logo">
-            <img src="./img/logo.png" alt="Лого" draggable="false" />
+            <img src="./img/logo.svg" alt="Лого" draggable="false" />
           </div>
           <nav class="menu">
             <a href="#" class="menu-item">Блог</a>
@@ -24,7 +24,7 @@
             <a href="#" class="menu-item">Компаниям</a>
           </nav>
           <div class="end-block">
-            <div class="currency-lang-nav">
+            <div class="currency-lang-nav hide">
               <div class="currency">
                 <svg width="45" height="20" viewBox="0 0 45 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12.0837 12.5C15.5303 12.5 18.3337 9.69667 18.3337 6.25C18.3337 2.80333 15.5303 0 12.0837 0H4.16699V10H1.66699V12.5H4.16699V14.1667H1.66699V16.6667H4.16699V20H6.66699V16.6667H13.3337V14.1667H6.66699V12.5H12.0837ZM6.66699 2.5H12.0837C14.1512 2.5 15.8337 4.1825 15.8337 6.25C15.8337 8.3175 14.1512 10 12.0837 10H6.66699V2.5Z" fill="#191919"/>
@@ -461,7 +461,7 @@
           </div>
           <div class="price-slider-block">
             <div class="price-top">
-              <p class="price-counter"></p>
+              <p class="price-counter">5₽</p>
               <p class="price-counter">4₽</p>
               <p class="price-counter">3₽</p>
               <p class="price-counter">2₽</p>
@@ -501,7 +501,7 @@
               <div class="microphone">
                 <p class="price-counter-active">5₽</p>
                 <img
-                  src="./img/микрофон.svg"
+                  src="./img/микрофон.png"
                   alt="microphone"
                   draggable="false"
                   class="microphone"
@@ -509,11 +509,10 @@
                 <p class="price-counter-active">-10%</p>
               </div>
               <div class="price-slider">
-                <div class="microphone-glow"></div>
                 <p></p>
-                <p>1000</p>
-                <p>10000</p>
-                <p>50000</p>
+                <p>1 000</p>
+                <p>10 000</p>
+                <p>50 000</p>
                 <p></p>
               </div>
             </div>
@@ -528,119 +527,60 @@
           <div class="calculator-box">
             <div class="calculator-bg">
               <img
-              src="./img/calculator-bg-main.png"
+              src="./img/calculator-bg-main.svg"
               draggable="false"
               alt="bg"
             />
               <img
                 class="calculator-mobile-bg"
-                src="./img/calculator-bg.png"
+                src="./img/calculator-bg.svg"
                 draggable="false"
                 alt="bg"
               />
             </div>
             <div class="price-display-box">
               <div class="change-price-box">
-                <div class="mobile-arrows-left">
-                  <button class="mobile-left">
-                    <img
-                      class="full-arrows-left-triple"
-                      src="./img/arrows/triple-left.png"
-                      draggable="false"
-                      alt="arrow right"
-                    />
-                  </button>
-                  <button class="mobile-left">
-                    <img
-                      class="full-arrows-left-double"
-                      src="./img/arrows/double-left.png"
-                      draggable="false"
-                      alt="arrow right"
-                    />
-                  </button>
-                </div>
                 <button class="change-price-left">
                   <div class="image-container">
                     <img
-                      src="./img/arrows/1 влево.svg "
+                      src="./img/1 влево бел.svg "
                       draggable="false"
                       alt="arrow right"
                     />
+                    <img
+                      src="./img/1 влево.svg "
+                      draggable="false"
+                      alt="arrow right"
+                      class="hide"
+                    />
                   </div>
                 </button>
-
-                <div class="full-arrows-left hide">
-                  <div class="arrows-container">
-                    <button class="triple-left">
-                      <div class="image-container">
-                        <img src="./img/arrows/3 влево.svg " draggable="false" alt="triple arrow left" />
-                      </div>
-                    </button>
-                    <button class="double-left">
-                      <div class="image-container">
-                        <img src="./img/arrows/2 влево.svg " draggable="false" alt="double arrow left" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
                 <div class="calculator-value">
                   <input
                     type="number"
-                    value="1"
-                    min="1"
+                    value="0"
+                    min="0"
                     max="100000"
                     class="calculator-value-numb"
                   />
-                  <div class="calculator-value-numb">минут</div>
+                  <div class="">минут</div>
                 </div>
                 <button class="change-price-right">
                   <div class="image-container">
                     <img
-                      src="./img/arrows/1 вправо.svg"
+                      src="./img/1 вправо бел.svg"
                       draggable="false"
                       alt="arrow right"
+                    />
+                    <img
+                      src="./img/1 вправо.svg"
+                      draggable="false"
+                      alt="arrow right"
+                      class="hide"
                     />
                   </div>
                 </button>
-                <div class="mobile-arrows-right">
-                  <button class="mobile-right">
-                    <img
-                      class="full-arrows-right-double"
-                      src="./img/arrows/double-right.png"
-                      draggable="false"
-                      alt="arrow right"
-                    />
-                  </button>
-                  <button class="mobile-right">
-                    <img
-                      class="full-arrows-right-triple"
-                      src="./img/arrows/triple-right.png"
-                      draggable="false"
-                      alt="arrow right"
-                    />
-                  </button>
-                </div>
-                <div class="full-arrows-right hide">
-                  <div class="arrows-container">
-                    <button class="double-right">
-                      <div class="image-container">
-                        <img src="./img/arrows/2 вправо.svg" draggable="false" alt="double arrow right" />
-                      </div>
-                    </button>
-                    <button class="triple-right">
-                      <div class="image-container">
-                        <img src="./img/arrows/3 вправо.svg" draggable="false" alt="triple arrow right" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
               </div>
-              <img
-                class="arrows-bg-mobile"
-                src="./img/arrows-bg-mobile.png"
-                draggable="false"
-                alt="bg"
-              />
               <h3>Итого</h3>
               <h1>3</h1>
               <button class="buy-button">

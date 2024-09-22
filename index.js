@@ -105,109 +105,10 @@ document.addEventListener('click', (event) => {
   }
 });
 
-
-// ----------------------------------------------------------------ARROWS --------------------------------------------------------------------//
-// Get the change price elements
-const changePriceLeft = document.querySelector('.change-price-left');
-const changePriceRight = document.querySelector('.change-price-right');
-
-// Get the full arrows elements
-const fullArrowsLeft = document.querySelector('.full-arrows-left');
-const fullArrowsRight = document.querySelector('.full-arrows-right');
-
-// Get the calculator value element
-const calculatorValue = document.querySelector('.calculator-value-numb');
-
-// Get the double and triple arrow buttons
-const doubleRightButton = fullArrowsRight.querySelector('.double-right');
-const tripleRightButton = fullArrowsRight.querySelector('.triple-right');
-const tripleLeftButton = fullArrowsLeft.querySelector('.triple-left');
-const doubleLeftButton = fullArrowsLeft.querySelector('.double-left');
-
-function showFullArrows(arrowElement) {
-  arrowElement.classList.remove('hide');
-  arrowElement.style.display = 'block';
-  setTimeout(() => {
-      arrowElement.classList.add('show');
-  }, 10);
-}
-
-function hideFullArrows(arrowElement) {
-  const buttons = arrowElement.querySelectorAll('button');
-  let maxDelay = 0;
-
-  buttons.forEach(button => {
-      let delay;
-      if (button.classList.contains('double-left') || button.classList.contains('double-right')) {
-          delay = 100;
-      } else if (button.classList.contains('triple-left') || button.classList.contains('triple-right')) {
-          delay = 200;
-      } else {
-          delay = 0;
-      }
-
-      maxDelay = Math.max(maxDelay, delay);
-
-      setTimeout(() => {
-          button.style.opacity = '0';
-          button.style.visibility = 'hidden';
-      }, delay);
-  });
-
-  // Start fading out the container after the last button has started fading
-  setTimeout(() => {
-      arrowElement.classList.remove('show');
-      arrowElement.addEventListener('transitionend', function onTransitionEnd(e) {
-          if (e.propertyName === 'opacity') {
-              buttons.forEach(btn => {
-                  btn.style.opacity = '';
-                  btn.style.visibility = '';
-              });
-              arrowElement.removeEventListener('transitionend', onTransitionEnd);
-          }
-      });
-  }, maxDelay + 200); // Add 300ms to ensure buttons have started fading
-}
-  
-// Add event listeners for left arrow
-changePriceLeft.addEventListener('mouseenter', () => showFullArrows(fullArrowsLeft));
-changePriceLeft.addEventListener('mouseleave', (event) => {
-  if (!fullArrowsLeft.contains(event.relatedTarget)) {
-    hideFullArrows(fullArrowsLeft);
-  }
-});
-
-// Add event listeners for right arrow
-changePriceRight.addEventListener('mouseenter', () => showFullArrows(fullArrowsRight));
-changePriceRight.addEventListener('mouseleave', (event) => {
-  if (!fullArrowsRight.contains(event.relatedTarget)) {
-    hideFullArrows(fullArrowsRight);
-  }
-});
-
-// Add event listeners for full arrows to keep them visible
-fullArrowsLeft.addEventListener('mouseenter', () => showFullArrows(fullArrowsLeft));
-fullArrowsLeft.addEventListener('mouseleave', () => hideFullArrows(fullArrowsLeft));
-fullArrowsRight.addEventListener('mouseenter', () => showFullArrows(fullArrowsRight));
-fullArrowsRight.addEventListener('mouseleave', () => hideFullArrows(fullArrowsRight));
-
-// Function to update calculator value
-function updateCalculatorValue(increment) {
-  let currentValue = parseInt(calculatorValue.textContent);
-  calculatorValue.textContent = currentValue + increment;
-}
-
-// Add click events for double and triple buttons
-doubleLeftButton.addEventListener('click', () => updateCalculatorValue(-10));
-tripleLeftButton.addEventListener('click', () => updateCalculatorValue(-100));
-doubleRightButton.addEventListener('click', () => updateCalculatorValue(10));
-tripleRightButton.addEventListener('click', () => updateCalculatorValue(100));
-
 // ----------------------------------------------------------MICROPHONE--------------------------------------------------------//
 const slider = document.querySelector('.price-slider');
 const microphone = document.querySelector('.microphone');
 const totalPrice = document.querySelector('.price-display-box h1');
-const glowElement = document.querySelector('.microphone-glow');
 const priceCounters = document.querySelectorAll('.price-top .price-counter');
 const priceCountersPercent = document.querySelectorAll('.price-bottom .price-counter-percent');
 const activePriceCounter = document.querySelector('.microphone .price-counter-active');
@@ -232,52 +133,46 @@ styleSheet.type = "text/css";
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
 
-let SLIDER_WIDTH = 1122; // Default width, will be updated based on window size
+let SLIDER_WIDTH = 1120; // Default width, will be updated based on window size
 let SLIDER_HEIGHT = 0; // Will be used for the rotated slider
 let isRotated = false; // Flag to check if the slider is rotated
 
 const PRICE_RANGES = [
     { max: 1000, price: 5, widthPercentage: 23.8, discount: 0 },
     { max: 10000, price: 4, widthPercentage: 25.6, discount: 20 },
-    { max: 50000, price: 3, widthPercentage: 25.8, discount: 40 },
-    { max: 100000, price: 2, widthPercentage: 24.8, discount: 60 }
+    { max: 50000, price: 3, widthPercentage: 26.2, discount: 40 },
+    { max: 100000, price: 2, widthPercentage: 24.4, discount: 60 }
 ];
 
-
-
 function updateSliderDimensions() {
-    const windowWidth = window.innerWidth;
-    if (windowWidth >= 1122) {
-        SLIDER_WIDTH = 1122;
-        isRotated = false;
-    } else if (windowWidth >= 1000) {
-        SLIDER_WIDTH = 850;
-        isRotated = false;
-    } else if (windowWidth >= 700) {
-        SLIDER_WIDTH = 620;
-        isRotated = false;
-    } else if (windowWidth >= 480) {
-        SLIDER_WIDTH = 450;
-        isRotated = false;
-    } else {
-        SLIDER_WIDTH = 300;
-        SLIDER_HEIGHT = 460; // Assuming the rotated height is 460px, adjust as needed
-        isRotated = true;
-    }
+  const windowWidth = window.innerWidth;
+  if (windowWidth >= 1001) {
+      SLIDER_WIDTH = 1120;
+      isRotated = false;
+  } else if (windowWidth <= 1000 && windowWidth > 700) {
+      SLIDER_WIDTH = 800; // Adjust this value as needed
+      isRotated = false;
+  } else if (windowWidth <= 700 && windowWidth > 480) {
+      SLIDER_WIDTH = 620; // Adjust this value as needed
+      isRotated = false;
+  } else if (windowWidth <= 480 && windowWidth > 360) {
+      SLIDER_WIDTH = 440; // Adjust this value as needed
+      isRotated = false;
+  } else {
+      SLIDER_WIDTH = 310;
+      SLIDER_HEIGHT = 460;
+      isRotated = true;
+  }
 
-    
-    // Recalculate widths for each range
-    PRICE_RANGES.forEach(range => {
-        range.width = (range.widthPercentage / 100) * (SLIDER_WIDTH);
-    });
+  // Recalculate widths for each range
+  let totalPercentage = PRICE_RANGES.reduce((sum, range) => sum + range.widthPercentage, 0);
+  PRICE_RANGES.forEach(range => {
+      range.width = (range.widthPercentage / totalPercentage) * SLIDER_WIDTH;
+  });
 }
 
 function updatePositions(position, smooth = false) {
-    if (glowElement) {
-        glowElement.classList.toggle('smooth-transition', smooth);
-        glowElement.style.left = `${position}px`;
-        glowElement.style.top = '50%';
-    }
+
     
     if (microphone) {
         microphone.classList.toggle('smooth-transition', smooth);
@@ -286,16 +181,17 @@ function updatePositions(position, smooth = false) {
 }
 
 function calculateMinutes(position) {
-    let accumulatedWidth = 0;
-    for (let range of PRICE_RANGES) {
-        if (position <= accumulatedWidth + range.width) {
-            const relativePosition = position - accumulatedWidth;
-            const rangePercentage = relativePosition / range.width;
-            return Math.round((range.max - (accumulatedWidth > 0 ? PRICE_RANGES[PRICE_RANGES.indexOf(range) - 1].max : 0)) * rangePercentage) + (accumulatedWidth > 0 ? PRICE_RANGES[PRICE_RANGES.indexOf(range) - 1].max : 0);
-        }
-        accumulatedWidth += range.width;
-    }
-    return 100000; // Max value
+  let accumulatedWidth = 0;
+  for (let range of PRICE_RANGES) {
+      if (position <= accumulatedWidth + range.width) {
+          const relativePosition = position - accumulatedWidth;
+          const rangePercentage = relativePosition / range.width;
+          const prevMax = accumulatedWidth > 0 ? PRICE_RANGES[PRICE_RANGES.indexOf(range) - 1].max : 0;
+          return Math.round(prevMax + (range.max - prevMax) * rangePercentage);
+      }
+      accumulatedWidth += range.width;
+  }
+  return 100000; // Max value
 }
 
 function calculatePrice(minutes) {
@@ -321,30 +217,30 @@ let lastActiveIndex = -1;
 let activatedIndices = [];
 
 function updateDisplay(minutes, smooth = false) {
-    minutes = Math.max(0, Math.min(minutes, 100000));
-    if (calculatorInput) {
-        calculatorInput.value = minutes;
-        resizeInput.call(calculatorInput);
-    }
-    
-    const currentRange = PRICE_RANGES.find(range => minutes <= range.max) || PRICE_RANGES[PRICE_RANGES.length - 1];
-    const price = currentRange.price;
-    const discount = currentRange.discount;
+  minutes = Math.max(0, Math.min(minutes, 100000));
+  if (calculatorInput) {
+      calculatorInput.value = minutes;
+      resizeInput.call(calculatorInput);
+  }
+  
+  const currentRange = PRICE_RANGES.find(range => minutes <= range.max) || PRICE_RANGES[PRICE_RANGES.length - 1];
+  const price = currentRange.price;
+  const discount = currentRange.discount;
 
-    if (totalPrice) {
-        const formattedPrice = (price * minutes).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        totalPrice.textContent = formattedPrice;
-    }
+  if (totalPrice) {
+      const formattedPrice = (price * minutes).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      totalPrice.textContent = formattedPrice;
+  }
 
-    const position = calculatePosition(minutes);
-    updatePositions(position, smooth);
+  const position = calculatePosition(minutes);
+  updatePositions(position, smooth);
 
-    if (activePriceCounter) {
-        activePriceCounter.textContent = price + '₽';
-    }
-    if (activePriceCounterPercent) {
-        activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
-    }
+  if (activePriceCounter) {
+      activePriceCounter.textContent = price + '₽';
+  }
+  if (activePriceCounterPercent) {
+      activePriceCounterPercent.textContent = discount ? `-${discount}%` : '';
+  }
 }
     
 function moveMicrophone(e, smooth = false) {
@@ -363,16 +259,16 @@ function moveMicrophone(e, smooth = false) {
     updateDisplay(minutes, smooth);
 }
 function calculatePosition(minutes) {
-    let accumulatedWidth = 0;
-    for (let range of PRICE_RANGES) {
-        if (minutes <= range.max) {
-            const prevMax = accumulatedWidth > 0 ? PRICE_RANGES[PRICE_RANGES.indexOf(range) - 1].max : 0;
-            const rangePercentage = (minutes - prevMax) / (range.max - prevMax);
-            return accumulatedWidth + (rangePercentage * range.width);
-        }
-        accumulatedWidth += range.width;
-    }
-    return SLIDER_WIDTH;
+  let accumulatedWidth = 0;
+  for (let range of PRICE_RANGES) {
+      if (minutes <= range.max) {
+          const prevMax = accumulatedWidth > 0 ? PRICE_RANGES[PRICE_RANGES.indexOf(range) - 1].max : 0;
+          const rangePercentage = (minutes - prevMax) / (range.max - prevMax);
+          return accumulatedWidth + (rangePercentage * range.width);
+      }
+      accumulatedWidth += range.width;
+  }
+  return SLIDER_WIDTH;
 }
 
 function moveMicrophone(e, smooth = false) {
@@ -416,34 +312,32 @@ if (slider) {
 }
 
 function updateCalculatorValue(changeAmount) {
-    let currentMinutes = calculateMinutes(
-        parseFloat(microphone.style.left));
-    currentMinutes += changeAmount;
-    currentMinutes = Math.max(1, Math.min(currentMinutes, 100000));
-    updateDisplay(currentMinutes);
+  let currentMinutes = parseInt(calculatorInput.value, 10);
+  currentMinutes += changeAmount;
+  currentMinutes = Math.max(1, Math.min(currentMinutes, 100000));
+  updateDisplay(currentMinutes, true);
 }
+
+document.querySelectorAll('.image-container').forEach(container => {
+  const images = container.querySelectorAll('img');
+  
+  container.addEventListener('mouseenter', () => {
+    images[0].classList.add('hide');
+    images[1].classList.remove('hide');
+  });
+
+  container.addEventListener('mouseleave', () => {
+    images[0].classList.remove('hide');
+    images[1].classList.add('hide');
+  });
+});
+
+// Keep your existing code
 const leftArrow = document.querySelector('.change-price-left');
 const rightArrow = document.querySelector('.change-price-right');
-const doubleLeftArrow = document.querySelector('.full-arrows-left .full-arrows-left-double');
-const tripleLeftArrow = document.querySelector('.full-arrows-left .full-arrows-left-triple');
-const doubleRightArrow = document.querySelector('.full-arrows-right .full-arrows-right-double');
-const tripleRightArrow = document.querySelector('.full-arrows-right .full-arrows-right-triple');
-const doublemLeftArrow = document.querySelector('.full-arrows-left-double');
-const triplemLeftArrow = document.querySelector('.full-arrows-left-triple');
-const doublemRightArrow = document.querySelector('.full-arrows-right-double');
-const triplemRightArrow = document.querySelector('.full-arrows-right-triple');
 
 if (leftArrow) leftArrow.addEventListener('click', () => updateCalculatorValue(-1));
 if (rightArrow) rightArrow.addEventListener('click', () => updateCalculatorValue(1));
-if (doubleLeftArrow) doubleLeftArrow.parentElement.addEventListener('click', () => updateCalculatorValue(-10));
-if (tripleLeftArrow) tripleLeftArrow.parentElement.addEventListener('click', () => updateCalculatorValue(-100));
-if (doubleRightArrow) doubleRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(10));
-if (tripleRightArrow) tripleRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(100));
-
-if (doublemLeftArrow) doublemLeftArrow.parentElement.addEventListener('click', () => updateCalculatorValue(-10));
-if (triplemLeftArrow) triplemLeftArrow.parentElement.addEventListener('click', () => updateCalculatorValue(-100));
-if (doublemRightArrow) doublemRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(10));
-if (triplemRightArrow) triplemRightArrow.parentElement.addEventListener('click', () => updateCalculatorValue(100));
 
 function handleInputChange(e) {
     let minutes = parseInt(e.target.value, 10);
@@ -607,12 +501,7 @@ const phrases = [
 calculatorInput.addEventListener('input', resizeInput); 
 resizeInput.call(calculatorInput); 
 
-function resizeInput() {
-  if (this.value.length === 1 ) {
-    this.style.width = 1.5 + "ch";
-  } else {
-    this.style.width = this.value.length + "ch";
-  }
+function resizeInput(totalPrice) {
 }
 
 //------------------------------------------LADDER NAV ------------------------------------------------//
@@ -657,3 +546,90 @@ document.addEventListener('DOMContentLoaded', function() {
       buyButton.style.opacity = '1';
     }, 1500);
   });
+
+  function createSliderOverlay() {
+    const sliderBlock = document.querySelector('.price-slider-block');
+    const slider = document.querySelector('.price-slider');
+    const overlay = document.createElement('div');
+    overlay.className = 'slider-overlay';
+    
+    // Style the overlay
+    overlay.style.position = 'absolute';
+    overlay.style.top = '-20%';
+    overlay.style.left = '-35px';  // Align with the slider
+    overlay.style.width = 'calc(100% + 70px)';  // Extend width to match slider
+    overlay.style.height = '140%';
+    overlay.style.zIndex = '0';  // Ensure it's above other elements
+    overlay.style.cursor = 'default';  // Keep the default cursor
+    overlay.style.pointerEvents = 'none';  // Disable pointer events by default
+
+    sliderBlock.style.position = 'relative';
+    sliderBlock.appendChild(overlay);
+
+    let isScrolling = false;
+    let scrollTimeout;
+
+    sliderBlock.addEventListener('mouseenter', () => {
+        overlay.style.pointerEvents = 'auto';  // Enable pointer events on hover
+    });
+
+    sliderBlock.addEventListener('mouseleave', () => {
+        overlay.style.pointerEvents = 'none';  // Disable pointer events when not hovering
+    });
+
+    overlay.addEventListener('wheel', (e) => {
+        e.preventDefault();
+
+        if (!isScrolling) {
+            microphone.classList.remove('smooth-transition');
+        }
+
+        isScrolling = true;
+        clearTimeout(scrollTimeout);
+
+        const deltaY = e.deltaY;
+        const currentPosition = parseFloat(microphone.style.left) || 0;
+        const newPosition = currentPosition + deltaY * 0.1;
+console.log(SLIDER_WIDTH)
+        // Ensure the new position is within bounds
+        const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
+
+        updatePositions(boundedPosition, false);
+        const minutes = calculateMinutes(boundedPosition);
+        updateDisplay(minutes, false);
+
+        scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+            microphone.classList.add('smooth-transition');
+        }, 150);
+    });
+    slider.addEventListener('wheel', (e) => {
+      e.preventDefault();
+
+      if (!isScrolling) {
+          microphone.classList.remove('smooth-transition');
+      }
+
+      isScrolling = true;
+      clearTimeout(scrollTimeout);
+
+      const deltaY = e.deltaY;
+      const currentPosition = parseFloat(microphone.style.left) || 0;
+      const newPosition = currentPosition + deltaY * 0.1;
+
+      // Ensure the new position is within bounds
+      const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
+
+      updatePositions(boundedPosition, false);
+      const minutes = calculateMinutes(boundedPosition);
+      updateDisplay(minutes, false);
+
+      scrollTimeout = setTimeout(() => {
+          isScrolling = false;
+          microphone.classList.add('smooth-transition');
+      }, 150);
+  });
+}
+
+// Call this function after your existing initialization code
+createSliderOverlay();
