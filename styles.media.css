@@ -492,7 +492,8 @@ margin-top: -20px;
 	.main-block {
 		width: 360px;
 		height: 820px;
-		margin-top: -80px;
+		overflow: hidden;
+		margin-top: -90px;
 		background: rgba(32, 32, 32, 1);
 	}
 	.middle {
