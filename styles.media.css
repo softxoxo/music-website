@@ -170,11 +170,12 @@ line-height: 19px;
 		margin-left: -70px;
 	  }
 	  .change-price-box {
+		z-index: 1;
 		width: 300px;
 		height: 44px;
 		display: flex;
 		align-items: center;
-		margin-top: -50px;
+		margin-top: -40px;
 	  }
 
 	  .double-right, .triple-right, .double-left, .triple-left, .change-price-left, .change-price-right {
@@ -209,22 +210,16 @@ line-height: 19px;
 
 	  .buy-button {
 		width: 250px;
-		margin-bottom: 26px;
+		margin-top: 90px;
 	  }
 	  .currency-display {
 		width: 42px;
-		right: -24px;
+		margin-left: 280px;
 	  }
-	  .price-display-box {
-		backdrop-filter: blur(0px);
-	  }
-
 	  .price-display-box h3 {
 		margin-top: 0px;
 	}
-	.currency-display {
-		margin-top: 30px;
-	}
+
 	.price-slider {
 		font-size: 13px;
 	}
@@ -237,6 +232,9 @@ line-height: 19px;
 	  .calculator-box, .calculator-bg, body > div.layout-container > div > div.middle > div.calculator-box > div.calculator-bg > img:nth-child(1)  {
 		width: 300px;
 		height: 160px;
+	  }
+	  .calculator-bg {
+		margin-top: 0px;
 	  }
 	  .price-slider-block, .price-middle, .price-slider {
 		max-width: 620px;
@@ -343,9 +341,8 @@ border-radius: 5px;
 	}
 	   .calculator-bg {
 		width: 100%;
-		height: 100%;
 		display: flex;
-		bottom: 20px;
+margin-top: -20px;
 	  }
 	  
 .buy-button {
@@ -586,7 +583,7 @@ color: #FFFFFF;
 	  .price-display-box h3 {
 	font-size: 16px;
 	line-height: 11px;
-		padding-top: 20px;
+		padding-top: 0px;
 	}
 
 	.price-display-box h1 {
@@ -625,7 +622,7 @@ color: #FFFFFF;
 
 	  .change-price-box {
 		position: absolute;
-		top: -380px;
+		margin-top: -410px;
 		z-index: 2;
 	  }
 	  .calculator-value-numb {
@@ -639,6 +636,10 @@ color: #FFFFFF;
 .calculator-bg img:nth-child(1) {
 display: none;
 }
+
+.calculator-bg img:nth-child(2) {
+	width: 300px;
+}
 .calculator-bg {
 	margin-bottom: -40px;
 }
@@ -648,7 +649,7 @@ display: none;
 	  } 
 	  .price-slider-block {
 		transform: rotate(90deg);
-		margin-top: 240px;
+		margin-top: 200px;
 		margin-left: 50px;
 		z-index: 2;
 	  }
@@ -721,7 +722,7 @@ border-radius: 5px;
 		font-size: 18px;
 	  }
 	  .modal-present {
-		padding-bottom: 8px;
+		margin-bottom: 8px;
 	  }
 	  .close {
 		position: absolute;

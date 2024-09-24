@@ -147,7 +147,7 @@ const PRICE_RANGES = [
 function updateSliderDimensions() {
   const windowWidth = window.innerWidth;
   if (windowWidth >= 1001) {
-      SLIDER_WIDTH = 1120;
+      SLIDER_WIDTH = 1124;
       isRotated = false;
   } else if (windowWidth <= 1000 && windowWidth > 700) {
       SLIDER_WIDTH = 800; // Adjust this value as needed
@@ -314,7 +314,7 @@ if (slider) {
 function updateCalculatorValue(changeAmount) {
   let currentMinutes = parseInt(calculatorInput.value, 10);
   currentMinutes += changeAmount;
-  currentMinutes = Math.max(1, Math.min(currentMinutes, 100000));
+  currentMinutes = Math.max(0, Math.min(currentMinutes, 100000));
   updateDisplay(currentMinutes, true);
 }
 
@@ -336,8 +336,59 @@ document.querySelectorAll('.image-container').forEach(container => {
 const leftArrow = document.querySelector('.change-price-left');
 const rightArrow = document.querySelector('.change-price-right');
 
-if (leftArrow) leftArrow.addEventListener('click', () => updateCalculatorValue(-1));
-if (rightArrow) rightArrow.addEventListener('click', () => updateCalculatorValue(1));
+let intervalId = null;
+let timeoutId = null;
+const updateInterval = 100; // 10 times per second
+const holdDelay = 500; // 0.5 seconds
+const updateAmount = 1;
+
+function startUpdating(amount) {
+    if (intervalId === null) {
+        intervalId = setInterval(() => {
+            updateCalculatorValue(amount);
+        }, updateInterval);
+    }
+}
+
+function stopUpdating() {
+    if (intervalId !== null) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+    if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+    }
+}
+
+function handleMouseDown(amount) {
+    // Immediate update on mouse down
+    updateCalculatorValue(amount);
+    
+    timeoutId = setTimeout(() => {
+        startUpdating(amount);
+    }, holdDelay);
+}
+
+function handleMouseUp() {
+    stopUpdating();
+}
+
+if (leftArrow) {
+    leftArrow.addEventListener('mousedown', () => handleMouseDown(-updateAmount));
+    leftArrow.addEventListener('mouseup', handleMouseUp);
+    leftArrow.addEventListener('mouseleave', handleMouseUp);
+}
+
+if (rightArrow) {
+    rightArrow.addEventListener('mousedown', () => handleMouseDown(updateAmount));
+    rightArrow.addEventListener('mouseup', handleMouseUp);
+    rightArrow.addEventListener('mouseleave', handleMouseUp);
+}
+
+// Prevent text selection during rapid clicking
+leftArrow.addEventListener('selectstart', (e) => e.preventDefault());
+rightArrow.addEventListener('selectstart', (e) => e.preventDefault());
 
 function handleInputChange(e) {
     let minutes = parseInt(e.target.value, 10);
@@ -353,7 +404,7 @@ function handleInputChange(e) {
 if (calculatorInput) {
     calculatorInput.addEventListener('input', handleInputChange);
     calculatorInput.addEventListener('blur', function() {
-        this.value = Math.max(1, Math.min(parseInt(this.value, 10) || 1, 100000));
+        this.value = Math.max(0, Math.min(parseInt(this.value, 10) || 0, 100000));
     });
 }
 // Initialize
@@ -589,7 +640,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const deltaY = e.deltaY;
         const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-        const newPosition = -(currentPosition + deltaY * 0.1);
+        const newPosition = -(currentPosition + deltaY * 0.028);
         // Ensure the new position is within bounds
         const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
 
@@ -615,7 +666,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const deltaY = e.deltaY;
       const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-      const newPosition = -(currentPosition + deltaY * 0.1);
+      const newPosition = -(currentPosition + deltaY * 0.028);
 
       // Ensure the new position is within bounds
       const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
@@ -642,7 +693,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const deltaY = e.deltaY;
     const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-    const newPosition = -(currentPosition + deltaY * 0.1);
+    const newPosition = -(currentPosition + deltaY * 0.028);
 
     // Ensure the new position is within bounds
     const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
