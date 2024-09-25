@@ -598,6 +598,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1500);
   });
 
+  //--------------------------------------------------WHEEL MICROPHONE MOVEMENT----------------------------------//
+
   function createSliderOverlay() {
     const sliderBlock = document.querySelector('.price-slider-block');
     const slider = document.querySelector('.price-slider');
@@ -628,86 +630,90 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.style.pointerEvents = 'none';  // Disable pointer events when not hovering
     });
 
-    overlay.addEventListener('wheel', (e) => {
+    const SCROLL_SENSITIVITY = 0.028;
+    const SCROLL_TIMEOUT = 150;
+    
+    function handleWheel(e) {
         e.preventDefault();
-
+    
         if (!isScrolling) {
             microphone.classList.remove('smooth-transition');
         }
-
+    
         isScrolling = true;
         clearTimeout(scrollTimeout);
-
+    
         const deltaY = e.deltaY;
         const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-        const newPosition = -(currentPosition + deltaY * 0.028);
-        // Ensure the new position is within bounds
+        const newPosition = -(currentPosition + deltaY * SCROLL_SENSITIVITY);
         const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
-
+    
         updatePositions(boundedPosition, false);
         const minutes = calculateMinutes(boundedPosition);
         updateDisplay(minutes, false);
-
+    
         scrollTimeout = setTimeout(() => {
             isScrolling = false;
             microphone.classList.add('smooth-transition');
-        }, 150);
-    });
-
-    slider.addEventListener('wheel', (e) => {
-      e.preventDefault();
-
-      if (!isScrolling) {
-          microphone.classList.remove('smooth-transition');
-      }
-
-      isScrolling = true;
-      clearTimeout(scrollTimeout);
-
-      const deltaY = e.deltaY;
-      const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-      const newPosition = -(currentPosition + deltaY * 0.028);
-
-      // Ensure the new position is within bounds
-      const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
-
-      updatePositions(boundedPosition, false);
-      const minutes = calculateMinutes(boundedPosition);
-      updateDisplay(minutes, false);
-
-      scrollTimeout = setTimeout(() => {
-          isScrolling = false;
-          microphone.classList.add('smooth-transition');
-      }, 150);
-  });
-  
-  calculatorInput.addEventListener('wheel', (e) => {
-    e.preventDefault();
-
-    if (!isScrolling) {
-        microphone.classList.remove('smooth-transition');
+        }, SCROLL_TIMEOUT);
     }
-
-    isScrolling = true;
-    clearTimeout(scrollTimeout);
-
-    const deltaY = e.deltaY;
-    const currentPosition = -(parseFloat(microphone.style.left)) || 0;
-    const newPosition = -(currentPosition + deltaY * 0.028);
-
-    // Ensure the new position is within bounds
-    const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
-
-    updatePositions(boundedPosition, false);
-    const minutes = calculateMinutes(boundedPosition);
-    updateDisplay(minutes, false);
-
-    scrollTimeout = setTimeout(() => {
-        isScrolling = false;
-        microphone.classList.add('smooth-transition');
-    }, 150);
-});
+    
+    [overlay, slider, calculatorInput, microphone].forEach(element => {
+        element.addEventListener('wheel', handleWheel);
+    });
 }
 
 // Call this function after your existing initialization code
 createSliderOverlay();
+
+
+// ===================================================CURSOR-TRAIL--------------------------------------//
+const coords = { x: 0, y: 0 };
+const circles = document.querySelectorAll(".circle");
+const colors = [
+  "#08466b", 
+  "#1b567c", 
+  "#2a668e", 
+  "#3976a0", 
+  "#4787b2", 
+  "#5599c5", 
+  "#63abd8", 
+  "#71bdeb"
+];
+
+circles.forEach(function (circle, index) {
+  circle.x = 0;
+  circle.y = 0;
+  const colorIndex = Math.floor(index / 20);
+  circle.style.backgroundColor = colors[colorIndex % colors.length];
+});
+
+window.addEventListener("mousemove", function(e){
+  coords.x = e.clientX;
+  coords.y = e.clientY;
+  
+});
+
+function animateCircles() {
+  
+  let x = coords.x;
+  let y = coords.y;
+  
+  circles.forEach(function (circle, index) {
+    circle.style.left = x - 4 + "px";
+    circle.style.top = y - 4 + "px";
+    
+    circle.style.scale = (circles.length - index) / circles.length;
+    
+    circle.x = x;
+    circle.y = y;
+
+    const nextCircle = circles[index + 1] || circles[0];
+    x += (nextCircle.x - x) * 0.1;
+    y += (nextCircle.y - y) * 0.1;
+  });
+ 
+  requestAnimationFrame(animateCircles);
+}
+
+animateCircles();
