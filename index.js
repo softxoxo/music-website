@@ -335,6 +335,8 @@ document.querySelectorAll('.image-container').forEach(container => {
 // Keep your existing code
 const leftArrow = document.querySelector('.change-price-left');
 const rightArrow = document.querySelector('.change-price-right');
+const doubleLeftArrow = document.querySelector('.change-price-left-double');
+const doubleRightArrow = document.querySelector('.change-price-right-double');
 
 let intervalId = null;
 let timeoutId = null;
@@ -373,6 +375,9 @@ function handleMouseDown(amount) {
 function handleMouseUp() {
     stopUpdating();
 }
+
+if (doubleLeftArrow) doubleLeftArrow.addEventListener('click', () => updateCalculatorValue(-10));
+if (doubleRightArrow) doubleRightArrow.addEventListener('click', () => updateCalculatorValue(10));
 
 if (leftArrow) {
     leftArrow.addEventListener('mousedown', () => handleMouseDown(-updateAmount));

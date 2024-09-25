@@ -687,7 +687,7 @@ max-width: 56px;
     gap: 10px;
 }
 
-.change-price-box img:nth-child(4) {
+.change-price-box img:nth-child(6) {
     display: none;
 }
 
@@ -754,12 +754,15 @@ max-width: 56px;
     margin-left: -80px;
   }
   
-  .change-price-left, .change-price-right {
+  .change-price-left, .change-price-right, .change-price-left-double, .change-price-right-double {
     width: 48px;
     height: 36px;
     display: flex;
     overflow: hidden;
     position: relative;
+  }
+  .change-price-left-double, .change-price-right-double {
+    display: none;
   }
   
   .image-container {

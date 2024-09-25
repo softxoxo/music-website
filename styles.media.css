@@ -732,7 +732,7 @@ color: #FFFFFF;
 		margin-top: -20px;
 		z-index: 2;
 	  }
-	  .change-price-box img:nth-child(4) {
+	  .change-price-box img:nth-child(6) {
 		display: block;
 		position: absolute;
 		z-index: 1;
@@ -754,7 +754,19 @@ color: #FFFFFF;
 .calculator-bg img:nth-child(1) {
 display: none;
 }
-
+.change-price-left-double, .change-price-right-double {
+    display: flex;
+  }
+  .change-price-right-double .image-container img, .change-price-left-double .image-container img{
+	min-width: 150%;
+	min-height: 150%
+  }
+  .change-price-right {
+	margin-left: 6px
+  }
+  .change-price-left {
+	margin-right: 6px
+  }
 .calculator-bg img:nth-child(2) {
 	width: 300px;
 }
