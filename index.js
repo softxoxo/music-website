@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.style.pointerEvents = 'none';  // Disable pointer events when not hovering
     });
 
-    const SCROLL_SENSITIVITY = 0.028;
+    let SCROLL_SENSITIVITY = 0.028;
     const SCROLL_TIMEOUT = 150;
     
     function handleWheel(e) {
@@ -650,6 +650,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
         const deltaY = e.deltaY;
         const currentPosition = -(parseFloat(microphone.style.left)) || 0;
+        if (calculatorInput.value < 10000 && calculatorInput.value > 1000) {
+          SCROLL_SENSITIVITY = 0.0031
+        } else if (calculatorInput.value < 50000 && calculatorInput.value > 10000) {
+          SCROLL_SENSITIVITY = 0.00075
+        } else if (calculatorInput.value < 100000 && calculatorInput.value > 50000) {
+          SCROLL_SENSITIVITY = 0.00055
+        }
         const newPosition = -(currentPosition + deltaY * SCROLL_SENSITIVITY);
         const boundedPosition = Math.max(0, Math.min(newPosition, SLIDER_WIDTH));
     
