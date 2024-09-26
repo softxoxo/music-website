@@ -465,7 +465,7 @@ font-size: 22px;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 text-fill-color: transparent;
-margin-top: -8px;
+margin-top: -2px;
 height: 26px;
 }
 
@@ -1318,8 +1318,8 @@ body > div.layout-container > div > div.middle > div.calculator-box > div.calcul
     border-radius: 50%;
     background-color: black;
     position: fixed; 
-    top: 0;
-    left: 0;
+    top: -100px;
+
     pointer-events: none;
     z-index: 0;
   }

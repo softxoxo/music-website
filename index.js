@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.style.pointerEvents = 'none';  // Disable pointer events when not hovering
     });
 
-    let SCROLL_SENSITIVITY = 0.028;
+    let SCROLL_SENSITIVITY = 0.0028;
     const SCROLL_TIMEOUT = 150;
     
     function handleWheel(e) {
